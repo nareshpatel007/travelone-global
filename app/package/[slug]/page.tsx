@@ -1,0 +1,63 @@
+import AdsSingleTourPage from "@/components/pages/ads-package-tour";
+import { Metadata } from "next";
+
+type Props = {
+    params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata(
+    { params }: Props
+): Promise<Metadata> {
+    // unwrap params first
+    const { slug } = await params;
+
+    try {
+        // Fetch metadata
+        const res = await fetch(`${process.env.SITE_URL}/api/seo/tour`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ slug }),
+                next: { revalidate: 60 },
+            }
+        );
+
+        if (!res.ok) throw new Error("Failed");
+
+        // Parse response
+        const data = await res.json();
+        const tour = data?.data;
+
+        // Return metadata
+        return {
+            title: tour?.title || `Tours & Holiday Packages`,
+            description: tour?.description || "Explore best tour packages, itineraries and travel deals.",
+            alternates: {
+                canonical: `${process.env.SITE_URL}/package/${slug}`,
+            },
+            openGraph: {
+                title: tour?.title,
+                description: tour?.description,
+                url: `${process.env.SITE_URL}/package/${slug}`,
+                type: "website",
+            },
+        };
+    } catch {
+        // Return fallback
+        return {
+            title: `Tours & Holiday Packages`,
+            description: "Explore best tour packages, itineraries and travel deals.",
+        };
+    }
+}
+
+export default async function Page({ params }: Props) {
+    // unwrap params first
+    const { slug } = await params;
+
+    return (
+        <AdsSingleTourPage slug={slug} />
+    );
+}
