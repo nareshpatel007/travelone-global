@@ -10,43 +10,43 @@ import { ChevronDown } from "lucide-react";
 const data = [
     {
         question: "What is TravelOne?",
-        answer: "TravelOne is an online platform that connects travelers with travel providers, such as travel agencies, hotels, and tour operators, to provide a one-stop solution for all their travel needs.",
+        answer: "TravelOne is a global AI-driven travel orchestration platform. We utilize a proprietary 30-Marker Traveler DNA framework to connect international travelers with a vetted network of premier travel providers, hotels, and tour operators.",
     },
     {
-        question: "How does TravelOne work, and what are the benefits?",
-        answer: "TravelOne works by aggregating a wide range of travel products and services, including hotels, car rentals, and travel packages, into one convenient platform. This allows travelers to easily compare prices and options, book their travel, and manage their itinerary all in one place. The benefits of a smart travel marketplace include convenience, time-saving, and cost-effectiveness.",
+        question: "How does TravelOne work?",
+        answer: "Our platform, architected by our B2B Tech Hub in Toronto, aggregates global travel products into a synchronized ecosystem. This allows travelers to skip traditional search bars and receive itineraries perfectly matched to their Persona. All travel fulfillment and financial transactions are managed exclusively by TravelOne Global Travel Services LLC (USA).",
     },
     {
         question: "Can TravelOne provide the best travel deals?",
-        answer: "Yes, TravelOne allows travelers to compare prices from multiple travel providers and find the best deals available. This can be especially beneficial for those looking to book hotels, travel packages or other travel services during peak periods when prices can be high.",
+        answer: 'Yes. Our AI engine scans our global partner network in real-time to surface the highest-value options. This is particularly effective for bespoke packages and luxury stays where our "DNA" matching ensures you get the right value for your specific travel style.',
     },
     {
-        question: "Is my personal and financial data safe on TravelOne?",
-        answer: "TravelOne uses advanced security measures, such as encryption technology, to protect the personal and financial information of their users. Additionally, TravelOne complies with strict data privacy laws and regulations to ensure the protection of customer information.",
+        question: "Is my data safe on TravelOne?",
+        answer: "Absolutely. We utilize AES-256 encryption and architectural siloing. Your financial data is handled by the U.S. Merchant of Record and is never accessible to the AI systems in our Canadian tech hub. We comply with global privacy standards, including GDPR, CCPA, and PIPEDA.",
     },
     {
         question: "Does TravelOne charge hidden fees?",
-        answer: "No, there are no hidden fees when booking through TravelOne. The prices displayed on the platform are all-inclusive and transparent.",
+        answer: "No. Transparency is a core pillar of our Trust Centre. The prices displayed include all known taxes and fees. Our AI orchestration ensures you see the total cost before you authorize a transaction.",
     },
     {
-        question: "Can TravelOne simply modify or cancel my bookings?",
-        answer: "Yes, TravelOne allows travelers to make changes or cancellations to their bookings through the platform, although this may be subject to the terms and conditions of the travel provider.",
+        question: "How do I modify or cancel my bookings?",
+        answer: "You can manage your itinerary directly through the TravelOne platform. Changes and cancellations are subject to the specific terms of the travel provider, which are clearly disclosed by TravelOne USA at the time of booking.",
     },
     {
-        question: "How can TravelOne guarantee travel quality?",
-        answer: "TravelOne typically have partnered with reputable and established travel providers to ensure the quality of travel services. TravelOne also has customer feedback systems and review mechanisms to help travelers make informed decisions about the quality of the services they book.",
+        question: "How does TravelOne guarantee quality?",
+        answer: 'We only partner with established, tier-one Destination Management Companies (DMCs) and suppliers. Our "Local Soul" data units feed real-time quality scores into our AI to ensure our partners maintain the highest international standards.',
     },
     {
         question: "How does TravelOne satisfy customers?",
-        answer: "TravelOne aims to provide excellent customer satisfaction by offering a seamless and user-friendly booking experience. TravelOne has a customer support team available to assist with any questions or issues that may arise during the booking process.",
+        answer: 'We provide a seamless, high-fidelity experience by removing the "friction" of traditional travel planning. Our U.S.-based Service Team is available to assist with any logistical questions during your journey.',
     },
     {
-        question: "TravelOne accepts which payments?",
-        answer: "TravelOne accepts a variety of payment methods, including credit/debit cards, PayPal, and bank transfers.",
+        question: "Which payment methods are accepted?",
+        answer: "As the Merchant of Record, TravelOne Global Travel Services LLC (USA) accepts all major credit/debit cards (Visa, Mastercard, Amex), as well as secure digital payment options like PayPal.",
     },
     {
-        question: "How's TravelOne's customer service?",
-        answer: "The customer support experience on TravelOne platform includes a range of options such as email, phone, and live chat support. TravelOne also have online help center and FAQs to assist customers in resolving common issues.",
+        question: "How is TravelOne’s customer service?",
+        answer: 'Our global support framework includes email and live chat. For travelers on the road, our U.S. Service Hub provides dedicated assistance to ensure every detail of your "DNA-matched" journey is executed perfectly.',
     }
 ];
 

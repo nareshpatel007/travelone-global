@@ -1,8 +1,6 @@
 "use client";
 
-import { FacebookIcon, Instagram, Linkedin, Youtube } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function AboutTravelone() {
     return (
@@ -34,20 +32,20 @@ export default function AboutTravelone() {
                     </p>
 
                     <p className="text-black text-base sm:text-lg leading-relaxed">
-                        I created TravelOne to bridge that gap. We use architectural precision to orchestrate the world, but we use your 30-Marker Persona to make it feel like home.
+                        I created the Traveler DNA framework to bridge that gap. At our Toronto B2B Innovation Hub, we use architectural precision to build the tech that orchestrates the world. Our mission is to provide the intelligence that makes travel feel like home for the U.S. and international markets served by our partners at TravelOne Global Travel Services LLC (USA).
                     </p>
 
                     <p className="text-black text-base sm:text-lg leading-relaxed">
                         Welcome to the future of travel. Welcome to TravelOne.
                     </p>
 
-                    <div className="flex justify-center lg:justify-start">
+                    {/* <div className="flex justify-center lg:justify-start">
                         <Link href="https://www.linkedin.com/in/bhavinofficial/" rel="nofollow" target="_blank">
                             <span className="w-10 h-10 rounded-full text-black border hover:bg-black hover:text-white flex items-center justify-center cursor-pointer">
                                 <Linkedin className="h-5 w-5" />
                             </span>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

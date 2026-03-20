@@ -30,19 +30,21 @@ export default function EconomicTimesSection({ bgColor }: Props) {
                         className="object-contain h-auto w-40 md:w-80 mx-auto"
                     />
 
-                    <Link
-                        href="https://travel.economictimes.indiatimes.com/news/technology/travelone-technologies-launches-ai-driven-global-traveller-dna-platform-in-1659b-market/128960290?utm_source=top_news&utm_medium=tagListing"
-                        target="_blank"
-                        rel="nofollow"
-                    >
-                        <button className="px-5 py-2 bg-black text-md text-white cursor-pointer hover:bg-white hover:text-black border border-black transition">
-                            Read Full Story
-                        </button>
-                    </Link>
+                    <div className="space-y-3">
+                        <Link
+                            href="https://travel.economictimes.indiatimes.com/news/technology/travelone-technologies-launches-ai-driven-global-traveller-dna-platform-in-1659b-market/128960290?utm_source=top_news&utm_medium=tagListing"
+                            target="_blank"
+                            rel="nofollow"
+                        >
+                            <button className="px-5 py-2 bg-black text-md text-white cursor-pointer hover:bg-white hover:text-black border border-black transition">
+                                Read Full Story
+                            </button>
+                        </Link>
 
-                    <p className="text-base max-w-3xl">
-                        Showcasing the global innovation developed at our Toronto-based B2B Research & Development Hub.
-                    </p>
+                        <p className="text-xs mt-5 text-black">
+                            Showcasing the global innovation developed at our Toronto-based B2B Research & Development Hub.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

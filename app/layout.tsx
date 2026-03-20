@@ -23,7 +23,7 @@ export const metadata: Metadata = {
         icon: "https://ik.imagekit.io/288weifiq/nextjs/to-favicon.png"
     },
     robots: "index, follow",
-    metadataBase: new URL("https://travelone.io"),
+    metadataBase: new URL("https://traveloneglobal.com"),
     alternates: {
         canonical: "/",
     },

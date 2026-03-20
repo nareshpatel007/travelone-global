@@ -18,6 +18,9 @@ export default function ContactPage() {
     const [ready, setReady] = useState(false);
     const [isFormLoading, setIsFormLoading] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [disableSubmit, setDisableSubmit] = useState(false);
+    const [countryProvince, setCountryProvince] = useState<string>("");
+    const [userCountry, setUserCountry] = useState<string>("");
     const [errors, setErrors] = useState("");
     const [formData, setFormData] = useState({
         name: "",
@@ -33,6 +36,11 @@ export default function ContactPage() {
             setReady(true);
         });
     }, []);
+
+    // If choose province
+    useEffect(() => {
+        setDisableSubmit(countryProvince === "Ontario");
+    }, [countryProvince]);
 
     // Handle form submit
     const handleSubmit = async () => {
@@ -150,9 +158,6 @@ export default function ContactPage() {
                                                     placeholder="Email Address"
                                                 />
                                             </div>
-                                        </div>
-
-                                        <div className="grid md:grid-cols-2 gap-5">
                                             <div>
                                                 <label className="block text-sm md:text-base font-medium text-gray-700 mb-2">
                                                     Contact Number <span className="text-red-500">*</span>
@@ -160,12 +165,42 @@ export default function ContactPage() {
                                                 <PhoneInput
                                                     defaultCountry="us"
                                                     value={formData.phone}
-                                                    onChange={(e) => setFormData({ ...formData, phone: e })}
+                                                    onChange={(value: any, data: any) => {
+                                                        setFormData({ ...formData, phone: value })
+                                                        setUserCountry(data?.country?.iso2);
+                                                    }}
                                                     placeholder="Enter your phone number"
                                                     className="w-full rounded-sm py-0.5 px-3 text-sm md:text-md text-black font-medium bg-white border border-gray-300"
                                                     inputClassName="w-full !border-0 !border-white"
                                                 />
                                             </div>
+                                            {userCountry && userCountry == 'ca' && <>
+                                                <div>
+                                                    <label className="block text-sm md:text-base font-medium text-gray-700 mb-2">
+                                                        Choose Province <span className="text-red-500">*</span>
+                                                    </label>
+                                                    <select
+                                                        onChange={(e) => {
+                                                            setCountryProvince(e.target.value);
+                                                        }}
+                                                        className="w-full px-4 py-2 border border-gray-300 rounded-sm outline-none transition-all resize-none focus:ring-1 focus:ring-[#333] focus:ring-opacity-50 placeholder:text-gray-400"
+                                                    >
+                                                        <option value="">Select province</option>
+                                                        <option value="Alberta">Alberta</option>
+                                                        <option value="British Columbia">British Columbia</option>
+                                                        <option value="Manitoba">Manitoba</option>
+                                                        <option value="New Brunswick">New Brunswick</option>
+                                                        <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                                                        <option value="Northwest Territories">Northwest Territories</option>
+                                                        <option value="Nova Scotia">Nova Scotia</option>
+                                                        <option value="Nunavut">Nunavut</option>
+                                                        <option value="Ontario">Ontario</option>
+                                                        <option value="Prince Edward Island">Prince Edward Island</option>
+                                                        <option value="Quebec">Quebec</option>
+                                                        <option value="Saskatchewan">Saskatchewan</option>
+                                                    </select>
+                                                </div>
+                                            </>}
                                             <div>
                                                 <label className="block text-sm md:text-base font-medium text-gray-700 mb-2">
                                                     Subject <span className="text-red-500">*</span>
@@ -184,19 +219,18 @@ export default function ContactPage() {
                                                     <option value="Other Issue">Other Issue</option>
                                                 </select>
                                             </div>
-                                        </div>
-
-                                        <div>
-                                            <label className="block text-sm md:text-base font-medium text-gray-700 mb-2">
-                                                Booking Reference Number (Optional)
-                                            </label>
-                                            <input
-                                                type="text"
-                                                value={formData.reference_no}
-                                                onChange={(e) => setFormData({ ...formData, reference_no: e.target.value })}
-                                                className="w-full px-4 py-2 border border-gray-300 rounded-sm outline-none transition-all resize-none focus:ring-1 focus:ring-[#333] focus:ring-opacity-50"
-                                                placeholder="Booking Number"
-                                            />
+                                            <div>
+                                                <label className="block text-sm md:text-base font-medium text-gray-700 mb-2">
+                                                    Booking Reference Number (Optional)
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    value={formData.reference_no}
+                                                    onChange={(e) => setFormData({ ...formData, reference_no: e.target.value })}
+                                                    className="w-full px-4 py-2 border border-gray-300 rounded-sm outline-none transition-all resize-none focus:ring-1 focus:ring-[#333] focus:ring-opacity-50"
+                                                    placeholder="Booking Reference Number"
+                                                />
+                                            </div>
                                         </div>
 
                                         <div>
@@ -213,12 +247,19 @@ export default function ContactPage() {
                                             />
                                         </div>
 
-                                        {errors && <div className="text-red-500 text-sm md:text-base mt-2">{errors}</div>}
+                                        {errors && <div className="text-red-500 text-sm">{errors}</div>}
+
+                                        {/* Disable submit */}
+                                        {disableSubmit && (
+                                            <div className="text-red-500 text-sm">
+                                                TravelOne Global Travel Services, LLC (USA) does not market to or provide travel services to residents of Ontario, Canada. This platform is strictly for the U.S. and international markets. For technology inquiries, please visit travelone.io.
+                                            </div>
+                                        )}
 
                                         <button
                                             type="button"
                                             onClick={handleSubmit}
-                                            disabled={isFormLoading}
+                                            disabled={isFormLoading || disableSubmit}
                                             className="w-full md:w-auto px-8 py-2.5 bg-black text-white font-medium rounded-sm hover:bg-black/90 cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                                         >
                                             {isFormLoading ? (
@@ -245,35 +286,17 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <span className="font-semibold text-gray-900 block mb-2">
-                                            Travel Services Headquarter
+                                            Location
                                         </span>
                                         <p className="text-sm text-black/90">
-                                            TravelOne Global Travel Services, LLC.
+                                            TravelOne Global Travel Services LLC (USA)
                                         </p>
                                         <p className="text-sm text-black/90">
-                                            418 Broadway #11017, Albany, NY, 12207, USA
+                                            30 N Gould St Ste N, Sheridan, WY 82801, USA
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className="bg-white rounded-xl p-5 border border-gray-200 hover:bg-gray-50">
-                                <div className="flex items-start gap-4">
-                                    <div className="p-2 bg-[#FFF9EE] rounded-lg">
-                                        <MapPin className="h-5 w-5 text-black" />
-                                    </div>
-                                    <div>
-                                        <span className="font-semibold text-gray-900 block mb-2">
-                                            Technology Centre
-                                        </span>
-                                        <p className="text-sm text-black/90">
-                                            TravelOne Technologies, Inc.
-                                        </p>
-                                        <p className="text-sm text-black/90">
-                                            19 Grand Trunk Crescent, Suite 1109, Toronto, ON M5J 3A3, Canada
-                                        </p>
-                                    </div>
-                                </div>
-                            </div> */}
                             <div className="bg-white rounded-xl p-5 border border-gray-200 hover:bg-gray-50">
                                 <div className="flex items-start gap-4">
                                     <div className="p-2 bg-[#FFF9EE] rounded-lg">
@@ -285,12 +308,6 @@ export default function ContactPage() {
                                             <p className="text-sm text-black/90">
                                                 <Link href="tel:+1-631-292-8833" className="hover:underline">+1 631 292 8833</Link>
                                             </p>
-                                            {/* <p className="text-sm text-black/90">
-                                                Travel Services Support: <Link href="tel:+1-631-292-8833" className="hover:underline">+1 631 292 8833</Link>
-                                            </p> */}
-                                            {/* <p className="text-sm text-black/90">
-                                                Tech Support: <Link href="tel:+1-437-966-9023" className="hover:underline">+1 437 966 9023</Link>
-                                            </p> */}
                                         </div>
                                     </div>
                                 </div>
@@ -306,56 +323,10 @@ export default function ContactPage() {
                                             <p className="text-sm text-black/90">
                                                 <Link href="mailto:connect@traveloneglobal.com" className="hover:underline">connect@traveloneglobal.com</Link>
                                             </p>
-                                            {/* <p className="text-sm text-black/90">
-                                                Travel Services Support: <Link href="mailto:connect@traveloneglobal.com" className="hover:underline">connect@traveloneglobal.com</Link>
-                                            </p> */}
-                                            {/* <p className="text-sm text-black/90">
-                                                Tech Support: <Link href="mailto:vipul@travelone.io" className="hover:underline">vipul@travelone.io</Link>
-                                            </p> */}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className="bg-white rounded-xl p-5 border border-gray-200 hover:bg-gray-50">
-                                <div className="flex items-start gap-4">
-                                    <div className="p-2 bg-[#FFF9EE] rounded-lg">
-                                        <Mail className="h-5 w-5 text-black" />
-                                    </div>
-                                    <div>
-                                        <span className="font-semibold text-gray-900 block mb-2">Regulatory & Corporate Structure</span>
-                                        <div className="space-y-2">
-                                            <p className="text-sm text-black/90">
-                                                TravelOne Technologies, Inc. (Canada) is a travel technology firm and R&D hub focused on software development and proprietary data modeling. It does not provide travel counseling or sell travel services to the public.
-                                            </p>
-                                            <p className="text-sm text-black/90">
-                                                All travel consultations, services, products, and financial transactions are executed exclusively by TravelOne Global Travel Services, LLC (USA), a separate legal entity and the Merchant of Record for all journeys. Travel services are not currently marketed to, or available for purchase by, residents of Ontario, Canada, through this platform.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
-                            {/* <div className="bg-white rounded-xl p-5 border border-gray-200 hover:bg-gray-50">
-                                <div className="flex items-start gap-4">
-                                    <div className="p-2 bg-[#FFF9EE] rounded-lg">
-                                        <Star className="h-5 w-5 text-black" />
-                                    </div>
-                                    <div>
-                                        <span className="font-semibold text-gray-900 block mb-2">Write a Review</span>
-                                        <Link href="https://g.page/r/CWZjkl8q7OwGEBM/review" target="_blank" className="hover:underline underline-offset-2">
-                                            <p className="flex items-center gap-1 text-sm text-black">
-                                                Click here <ExternalLink className="h-4 w-4" />
-                                            </p>
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div> */}
-                            {/* <div className="bg-white rounded-xl p-5 border border-gray-200 hover:bg-gray-50">
-                                <div className="flex items-start gap-4">
-                                    <p className="flex items-center gap-1 text-sm text-black">
-                                        We operate Canada based business under host agency Century Travel Services - TICO - 2856798
-                                    </p>
-                                </div>
-                            </div> */}
                         </div>
                     </div>
                 </div>

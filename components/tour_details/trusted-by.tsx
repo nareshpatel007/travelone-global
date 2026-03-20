@@ -10,7 +10,7 @@ interface Props {
 
 export default function TrustedBy({ isAdsLanding }: Props) {
     return (
-        <div className="max-w-7xl mx-auto py-12 px-5 md:px-0 space-y-8 md:space-y-12">
+        <div className="w-full py-12 px-5 md:px-0 space-y-8 md:space-y-12">
             <div className="text-center max-w-4xl mx-auto space-y-1">
                 <h2 className="text-black text-3xl md:text-6xl leading-tight font-normal">
                     Trusted By
@@ -21,7 +21,7 @@ export default function TrustedBy({ isAdsLanding }: Props) {
             </div>
 
             {/* Non Ads Landing */}
-            {!isAdsLanding && <div className="grid grid-cols-2 gap-6 items-center justify-center place-items-center">
+            {!isAdsLanding && <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12">
                 <Link href="/partnership/ASTA.pdf" target="_blank">
                     <Image
                         src="/common/ASTA-Logo.png"
@@ -75,7 +75,7 @@ export default function TrustedBy({ isAdsLanding }: Props) {
                         className="object-contain h-auto w-36"
                     /> */}
                 </div>
-                <div className="hidden md:grid grid-cols-2 gap-10 items-center justify-center place-items-center">
+                <div className="hidden md:flex justify-center items-center gap-12">
                     <Image
                         src="/common/ASTA-Logo.png"
                         alt="TICO"

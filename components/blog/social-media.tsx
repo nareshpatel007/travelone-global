@@ -6,8 +6,8 @@ import Link from "next/link";
 // Define social media
 const socials = [
     { name: "Youtube", link: "https://www.youtube.com/@traveloneio", icon: Youtube },
-    { name: "Instagram", link: "https://www.instagram.com/travelone.io/", icon: Instagram },
-    { name: "Linkedin", link: "https://www.linkedin.com/company/traveloneio/", icon: Linkedin },
+    { name: "Instagram", link: "https://www.instagram.com/travelone.global", icon: Instagram },
+    // { name: "Linkedin", link: "https://www.linkedin.com/company/traveloneio/", icon: Linkedin },
 ];
 
 export default function FollowSection() {

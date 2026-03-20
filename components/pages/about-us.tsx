@@ -28,15 +28,15 @@ export default function AboutPage() {
             {ready && <>
                 <CommonHeader />
                 <HeroSection />
-                <ArchitectureModern />
+                <EconomicTimesSection bgColor={"bg-white"} />
                 <WhoWeAreSection />
                 {/* <OurVision /> */}
-                <EconomicTimesSection bgColor={"bg-white"} />
+                <ArchitectureModern />
                 <TravelOneJourney />
+                <TeamGlobalIntelSection />
                 <LeadershipTeam />
                 <LocalExpertise />
                 {/* <OurCommitment /> */}
-                {/* <TeamGlobalIntelSection /> */}
                 <CommonFooter isStickyShow={true} />
                 <StickyHomeHeader />
             </>}

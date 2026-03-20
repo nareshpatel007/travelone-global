@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: "*",
             allow: "/"
         },
-        sitemap: "https://travelone.io/sitemap.xml"
+        sitemap: "https://traveloneglobal.com/sitemap.xml"
     };
 }

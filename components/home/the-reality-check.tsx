@@ -18,7 +18,7 @@ const checkList: any = [
     {
         title: "The Result",
         chatgpt: "Static, unverified text blocks based on the internet info.",
-        travelone: "A Dynamic Portfolio vetted for your persona.",
+        travelone: "A Dynamic Portfolio vetted by our global system.",
     }
 ];
 
@@ -31,7 +31,7 @@ export default function TheRealityCheck() {
                         Prompting is fun. Precision is better.
                     </h2>
                     <span className="flex max-w-3xl mx-auto text-black text-md">
-                        ChatGPT and Gemini are great for "Day 1, Day 2" text blocks. TravelOne is the engine that actually understands why you travel.
+                        ChatGPT and Gemini are great for "Day 1, Day 2" text blocks. TravelOne is the architectural engine that actually understands why you travel.
                     </span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
@@ -59,7 +59,7 @@ export default function TheRealityCheck() {
                 </div>
                 <div className="text-center">
                     <span className="flex max-w-3xl mx-auto text-black text-base md:text-2xl">
-                        The Takeaway: Stop settling for a "hallucinated" itinerary. Get a travel experience that mirrors your soul.
+                        The Takeaway: Stop settling for a "hallucinated" itinerary. Get a travel experience that mirrors your persona.
                     </span>
                 </div>
             </div>

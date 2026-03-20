@@ -1,14 +1,12 @@
 "use client"
 
-import type React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckCircle, Download, Loader } from "lucide-react";
 import QuestionHeading from "@/components/plan_your_trip/landing/questionHeading";
 import Link from "next/link";
-import { getClientIp, getUserIp } from "@/lib/getClientIp";
+import { getUserIp } from "@/lib/getClientIp";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
-import { set } from "date-fns";
 
 interface Props {
     tour: any;
@@ -25,6 +23,14 @@ export function DownloadBrochure({ tour, open, onOpenChange }: Props) {
     const [downloadUrl, setDownloadUrl] = useState("");
     const [errors, setErrors] = useState("");
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+    const [disableSubmit, setDisableSubmit] = useState(false);
+    const [countryProvince, setCountryProvince] = useState<string>("");
+    const [userCountry, setUserCountry] = useState<string>("");
+
+    // If choose province
+    useEffect(() => {
+        setDisableSubmit(countryProvince === "Ontario");
+    }, [countryProvince]);
 
     // Handle form submit
     const handleSubmit = async () => {
@@ -120,6 +126,7 @@ export function DownloadBrochure({ tour, open, onOpenChange }: Props) {
                                 setPhone("");
                                 setAcceptTerms(false);
                                 setIsSubmitted(false);
+                                setDisableSubmit(false);
                             }}
                         >
                             ✕
@@ -133,19 +140,54 @@ export function DownloadBrochure({ tour, open, onOpenChange }: Props) {
                         {!isSubmitted ? (
                             <div className="space-y-4">
                                 <div className="space-y-1">
-                                    <label className="block text-md text-sm md:text-base text-black">Phone Number</label>
+                                    <label className="block text-md text-sm md:text-base text-black">
+                                        Phone Number <span className="text-red-500">*</span>
+                                    </label>
                                     <PhoneInput
                                         defaultCountry="us"
                                         placeholder="Enter your phone number"
                                         value={phone}
-                                        onChange={(e) => setPhone(e)}
+                                        onChange={(value: any, data: any) => {
+                                            setPhone(value);
+                                            setUserCountry(data?.country?.iso2);
+                                        }}
                                         className="w-full px-4 py-0.5 text-base rounded-sm border border-gray-900 bg-white outline-none"
                                         inputClassName="w-full !border-0 text-sm md:text-md !border-white"
                                     />
                                 </div>
 
+                                {userCountry && userCountry == 'ca' && <>
+                                    <div className="space-y-1">
+                                        <label className="block text-md text-sm md:text-base text-black">
+                                            Choose Province <span className="text-red-500">*</span>
+                                        </label>
+                                        <select
+                                            className="w-full px-4 py-2 rounded-sm border border-[#2F5D50] bg-white outline-none"
+                                            onChange={(e) => {
+                                                setCountryProvince(e.target.value);
+                                            }}
+                                        >
+                                            <option value="">Select province</option>
+                                            <option value="Alberta">Alberta</option>
+                                            <option value="British Columbia">British Columbia</option>
+                                            <option value="Manitoba">Manitoba</option>
+                                            <option value="New Brunswick">New Brunswick</option>
+                                            <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                                            <option value="Northwest Territories">Northwest Territories</option>
+                                            <option value="Nova Scotia">Nova Scotia</option>
+                                            <option value="Nunavut">Nunavut</option>
+                                            <option value="Ontario">Ontario</option>
+                                            <option value="Prince Edward Island">Prince Edward Island</option>
+                                            <option value="Quebec">Quebec</option>
+                                            <option value="Saskatchewan">Saskatchewan</option>
+                                        </select>
+                                    </div>
+                                </>}
+
                                 <div className="space-y-1">
-                                    <label className="block text-md text-sm md:text-base text-black">Email address</label>
+                                    <label className="block text-md text-sm md:text-base text-black">
+                                        Email address <span className="text-red-500">*</span>
+                                    </label>
                                     <input
                                         id="email"
                                         type="email"
@@ -157,7 +199,7 @@ export function DownloadBrochure({ tour, open, onOpenChange }: Props) {
                                     />
                                 </div>
 
-                                <div className="flex items-start gap-2">
+                                {!disableSubmit && <div className="flex items-start gap-2">
                                     <input
                                         type="checkbox"
                                         id="terms"
@@ -167,14 +209,22 @@ export function DownloadBrochure({ tour, open, onOpenChange }: Props) {
                                     <label className="text-xs md:text-sm text-gray-700">
                                         I agree to the <Link href="/legal/terms-service" target="_blank" className="underline">T&Cs</Link> and <Link href="/legal/privacy-policy" target="_blank" className="underline">Privacy Policy</Link>, and consent to receive communications from TravelOne Global Travel Services, LLC (USA), including follow-up call and text messages for quotes, scheduling, and call reminders, regarding my inquiry. Std msg & data rates apply. Text STOP to cancel, HELP for info. By continuing, you acknowledge that travel services are fulfilled by TravelOne Global Travel Services, LLC (USA).
                                     </label>
-                                </div>
+                                </div>}
 
-                                {errors && <div className="text-sm md:text-base text-red-600">{errors}</div>}
+                                {/* Error */}
+                                {errors && <p className="text-center text-sm text-red-600">{errors}</p>}
+
+                                {/* Disable submit */}
+                                {disableSubmit && (
+                                    <p className="text-center text-sm text-red-600">
+                                        TravelOne Global Travel Services, LLC (USA) does not market to or provide travel services to residents of Ontario, Canada. This platform is strictly for the U.S. and international markets. For technology inquiries, please visit travelone.io.
+                                    </p>
+                                )}
 
                                 <button
                                     type="button"
                                     onClick={handleSubmit}
-                                    disabled={formLoading}
+                                    disabled={formLoading || disableSubmit}
                                     className="w-full flex items-center justify-center bg-black text-sm md:text-base text-white font-normal py-2 rounded-md hover:bg-black/90 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {formLoading && <Loader className="w-4 h-4 mr-2 animate-spin" />}

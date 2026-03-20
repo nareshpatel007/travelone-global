@@ -9,7 +9,7 @@ export default function StartWithWho() {
             <div className="bg-[#FFF9EE] flex items-center px-6 py-10 md:py-0">
                 <div className="text-center space-y-10">
                     <p className="text-black text-base md:text-xl">
-                        Global operations managed by ASTA registered industry professionals. We maintain the highest standards of consumer protection and financial integrity.
+                        Global travel fulfilment is managed by ASTA-registered industry professionals from TravelOne Global Travel Services LLC.
                     </p>
                     <div className="flex flex-wrap justify-center items-center text-center gap-10 md:gap-20">
                         <Link href="/partnership/ASTA.pdf" target="_blank">

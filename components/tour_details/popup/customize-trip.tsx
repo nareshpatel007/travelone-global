@@ -4,7 +4,7 @@ import QuestionHeading from "@/components/plan_your_trip/common/questionHeading"
 import { getUserIp } from "@/lib/getClientIp";
 import { CheckCircle, Loader2, MoveLeft, X } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PhoneInput } from "react-international-phone";
 import { InlineWidget } from "react-calendly";
 import "react-international-phone/style.css";
@@ -41,6 +41,9 @@ export function CustomizeTrip({ tour = {}, open, onOpenChange, mainTitle, subTit
     const [errors, setErrors] = useState("");
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
     const [activeTab, setActiveTab] = useState<"meeting" | "inquiry">("inquiry");
+    const [disableSubmit, setDisableSubmit] = useState(false);
+    const [countryProvince, setCountryProvince] = useState<string>("");
+    const [userCountry, setUserCountry] = useState<string>("");
 
     // Handle close
     const handleClose = () => {
@@ -50,6 +53,11 @@ export function CustomizeTrip({ tour = {}, open, onOpenChange, mainTitle, subTit
         setFormData(initialFormData);
         setFormLoading(false);
     };
+
+    // If choose province
+    useEffect(() => {
+        setDisableSubmit(countryProvince === "Ontario");
+    }, [countryProvince]);
 
     // Handle form submit
     const handleSubmit = async () => {
@@ -196,11 +204,41 @@ export function CustomizeTrip({ tour = {}, open, onOpenChange, mainTitle, subTit
                                                     defaultCountry="us"
                                                     placeholder="Enter your phone number"
                                                     value={formData.phone}
-                                                    onChange={(e) => setFormData({ ...formData, phone: e })}
+                                                    onChange={(value: any, data: any) => {
+                                                        setFormData({ ...formData, phone: value });
+                                                        setUserCountry(data?.country?.iso2);
+                                                    }}
                                                     className="w-full px-4 py-0.5 text-base rounded-sm border border-[#2F5D50] bg-white outline-none"
                                                     inputClassName="w-full !border-0 text-sm md:text-md !border-white"
                                                 />
                                             </div>
+                                            {userCountry && userCountry == 'ca' && <>
+                                                <div>
+                                                    <label className="block text-base md:text-md font-medium text-[#333] mb-1">
+                                                        Choose Province <span className="text-red-500">*</span>
+                                                    </label>
+                                                    <select
+                                                        className="w-full px-4 py-2 rounded-sm border border-[#2F5D50] bg-white outline-none"
+                                                        onChange={(e) => {
+                                                            setCountryProvince(e.target.value);
+                                                        }}
+                                                    >
+                                                        <option value="">Select province</option>
+                                                        <option value="Alberta">Alberta</option>
+                                                        <option value="British Columbia">British Columbia</option>
+                                                        <option value="Manitoba">Manitoba</option>
+                                                        <option value="New Brunswick">New Brunswick</option>
+                                                        <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                                                        <option value="Northwest Territories">Northwest Territories</option>
+                                                        <option value="Nova Scotia">Nova Scotia</option>
+                                                        <option value="Nunavut">Nunavut</option>
+                                                        <option value="Ontario">Ontario</option>
+                                                        <option value="Prince Edward Island">Prince Edward Island</option>
+                                                        <option value="Quebec">Quebec</option>
+                                                        <option value="Saskatchewan">Saskatchewan</option>
+                                                    </select>
+                                                </div>
+                                            </>}
                                             <div>
                                                 <label className="block text-base md:text-md font-medium text-[#333] mb-1">
                                                     Email <span className="text-red-500">*</span>
@@ -304,11 +342,18 @@ export function CustomizeTrip({ tour = {}, open, onOpenChange, mainTitle, subTit
                         <span className="text-sm md:text-base text-red-500">{errors}</span>
                     )}
 
+                    {/* Disable submit */}
+                    {disableSubmit && (
+                        <p className="max-w-4xl mx-auto text-center text-base text-red-600">
+                            TravelOne Global Travel Services, LLC (USA) does not market to or provide travel services to residents of Ontario, Canada. This platform is strictly for the U.S. and international markets. For technology inquiries, please visit travelone.io.
+                        </p>
+                    )}
+
                     {!isSubmitted && <div className="flex items-center">
                         <button
                             type="button"
                             onClick={handleSubmit}
-                            disabled={formLoading}
+                            disabled={formLoading || disableSubmit}
                             className="flex items-center justify-center gap-2 px-7 py-1.5 md:py-2 rounded font-medium transition-colors border border-black cursor-pointer bg-black text-white text-base hover:text-black hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {formLoading && <Loader2 className="w-4 h-4 animate-spin" />}

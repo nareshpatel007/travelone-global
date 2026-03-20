@@ -18,7 +18,7 @@ export default function HeroSection() {
                         Beyond Search. Into Sync.
                     </h1>
                     <span className="text-md flex max-w-2xl mx-auto">
-                        The industry is built on "search results." TravelOne is built on Synchronization. We don't ask you where you want to go; we understand who you are, and the world aligns to meet you.
+                        The industry is built on "search results." TravelOne is built on Synchronization. We don't ask where you want to go; our intelligence understands who you are, and the world aligns to meet you.
                     </span>
                 </div>
             </div>

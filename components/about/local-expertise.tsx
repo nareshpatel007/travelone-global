@@ -12,9 +12,6 @@ export default function LocalExpertise() {
                         <h2 className="text-3xl md:text-6xl leading-tight font-normal">
                             Head of Global Data & Destination Insights
                         </h2>
-                        {/* <h2 className="text-3xl md:text-6xl leading-tight font-normal">
-                            Local Expertise, Global Scale.
-                        </h2> */}
                     </div>
 
                     <p className="text-black text-base sm:text-lg">
@@ -28,18 +25,6 @@ export default function LocalExpertise() {
                     <p className="text-black text-base sm:text-lg">
                         <b>Compliance:</b> We are fully committed to regulatory excellence. Our travel operations are conducted through our U.S. entity in accordance with international travel and tax regulations.
                     </p>
-                    
-                    {/* <p className="text-black text-base sm:text-lg">
-                        <b>Intelligence:</b> We don't just book; we orchestrate using local masters in our vetted destinations.
-                    </p>
-
-                    <p className="text-black text-base sm:text-lg">
-                        <b>Security:</b> Headquartered in USA, providing a secure legal and financial framework.
-                    </p>
-
-                    <p className="text-black text-base sm:text-lg">
-                        <b>Compliance:</b> Fully registered and compliant with international travel and tax regulations.
-                    </p> */}
 
                     {/* LOGOS */}
                     <div className="flex flex-wrap items-center justify-center lg:justify-start gap-10 pt-4">
@@ -69,10 +54,6 @@ export default function LocalExpertise() {
                     <p className="text-black text-base sm:text-lg pt-2">
                         Global travel fulfilment is managed by ASTA-registered industry professionals from TravelOne Global Travel Services LLC.
                     </p>
-                    
-                    {/* <p className="text-black text-base sm:text-lg pt-2">
-                        Global operations managed by ASTA registered industry professionals from our TravelOne USA.
-                    </p> */}
                 </div>
             </div>
             <div className="flex items-center justify-center">

@@ -21,30 +21,34 @@ export default function CareersPage() {
             {ready && <>
                 <CommonHeader />
 
-                <div className="max-w-7xl mx-auto px-5 md:px-0 py-6">
+                <div className="max-w-7xl mx-auto px-5 md:px-0 py-12">
                     <PageHeading
-                        main="Careers"
-                        sub="Join our team and make your travel dreams come true."
+                        main="Join the Architecture of Global Travel"
+                        sub="At TravelOne, we don’t just dream; we engineer the intelligence that makes those dreams a reality."
                     />
                     <div className="text-center space-y-8 text-black text-base md:text-lg">
-                        <p>
-                            JOINING OUR TEAM
+                        <p className="font-semibold">
+                            Innovate with Our Global B2B Technology Team (Canada)
                         </p>
-                        
+
                         <p>
-                            Finding your niche in the travel industry as a travel professional
+                            We are a dynamic organization committed to the professional progress of our innovators. At <b>TravelOne Technologies Inc. (Canada)</b>, you have the opportunity to make an impact in a setting that recognizes individual career aspirations in <b>data science, AI orchestration, and software architecture</b>.
                         </p>
-                        
+
                         <p>
-                            When you advance in your career, we advance as a company because we are a dynamic organisation that is committed to the professional progress of all of our employees. At TravelOne, you will have the opportunity to make an impact in a setting that recognises individual career aspirations and provides chances for professional development to promote ongoing advancement. Connect with us at connect@traveloneglobal.com if you think that being a part of a high-performing team that is also very creative and entertaining sounds like something that you would enjoy doing. Find out what your dreams are with our help, and then let's work together to make them a reality.
+                            Connect with us at <b>careers@travelone.io</b> if you are ready to join a high-performing R&D team that is redefining the "Science of Travel."
                         </p>
-                        
-                        <p>
-                            We are the creators of dreams...
+
+                        <p className="font-semibold">
+                            Join Our Global Service & Strategy Team (USA)
                         </p>
-                        
+
                         <p>
-                            All of us.
+                            For those looking to advance their career as a travel professional within a secure, global service framework, our U.S. entity <b>TravelOne Global Travel Services LLC (USA)</b> is looking for experts in global logistics and destination strategy.
+                        </p>
+
+                        <p>
+                            Connect with us at <b>connect@traveloneglobal.com</b> to explore opportunities within our international service and fulfillment team.
                         </p>
                     </div>
                 </div>

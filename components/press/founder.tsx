@@ -25,7 +25,7 @@ export default function FounderSection() {
                         <div className="absolute -bottom-6 -right-6 bg-white shadow-xl rounded-xl px-6 py-4">
                             <p className="font-semibold text-lg">Bhavin Vora</p>
                             <p className="text-sm text-black">
-                                Founder & CEO, TravelOne
+                                Founder & CEO - TravelOne Technologies Inc. (Canada)
                             </p>
                         </div>
                     </div>

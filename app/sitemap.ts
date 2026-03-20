@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 // Ensure environment variables exist
-const SITE_URL = process.env.SITE_URL || "https://travelone.io";
+const SITE_URL = process.env.SITE_URL || "https://traveloneglobal.com";
 const API_URL = process.env.API_URL;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

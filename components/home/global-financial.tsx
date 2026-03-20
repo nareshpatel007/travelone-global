@@ -17,7 +17,7 @@ export default function GlobalFinancialSection() {
                     </p>
 
                     <p className="text-black text-base sm:text-lg">
-                        TravelOne Services (USA) acts as your official Merchant of Record (MoR). We assume all transaction liability, manage global taxes, and guarantee your refunds—leaving you free to simply explore.
+                        TravelOne Services Global Travel Services (USA) acts as your official Merchant of Record (MoR). We assume all transaction liability, manage global taxes, and guarantee your refunds—leaving you free to simply explore.
                     </p>
 
                     <div className="space-y-2">

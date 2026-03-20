@@ -173,7 +173,7 @@ export default function CommonFooter({ isStickyShow = false }: Props) {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/legal/travel-advisory" className="hover:underline underline-offset-4">
+                                    <Link href="/coming-soon" className="hover:underline underline-offset-4">
                                         Travel Advisory
                                     </Link>
                                 </li>
@@ -231,17 +231,17 @@ export default function CommonFooter({ isStickyShow = false }: Props) {
                             </button>
                         </Link>
 
-                        <Link href="https://www.instagram.com/travelone.io/" target="_blank" rel="nofollow">
+                        <Link href="https://www.instagram.com/travelone.global" target="_blank" rel="nofollow">
                             <button type="button" className="flex items-center justify-center bg-[#f78da7] hover:bg-[#f78da7]/90 text-white p-2 rounded-full transition-colors cursor-pointer">
                                 <Instagram className="h-4 w-4" />
                             </button>
                         </Link>
 
-                        <Link href="https://www.linkedin.com/company/traveloneio/" target="_blank" rel="nofollow">
+                        {/* <Link href="https://www.linkedin.com/company/traveloneio/" target="_blank" rel="nofollow">
                             <button type="button" className="flex items-center justify-center bg-[#007aff] hover:bg-[#007aff]/90 text-white p-2 rounded-full transition-colors cursor-pointer">
                                 <Linkedin className="h-4 w-4" />
                             </button>
-                        </Link>
+                        </Link> */}
                     </div>
 
                     {/* COPYRIGHT */}

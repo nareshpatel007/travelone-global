@@ -13,7 +13,7 @@ const leadership = [
     // },
     {
         name: "Pranav Amin",
-        role: "CEO - TravelOne Global Travel Services, LLC. (USA)",
+        role: "CEO - TravelOne Global Travel Services (USA)",
         image: "/about/img_team_63e33bb2382cf1-81493713-48358927.webp"
     },
     // {
@@ -29,7 +29,7 @@ const leadership = [
     {
         name: "Louise Berg",
         // role: "Head of Destination Strategy & Social - Germany",
-        role: "Head of Global Data & Destination Insights",
+        role: "Head of Global Data & Destination Insights (USA)",
         image: "/about/img_team_63e33bbf427638-77996729-78363986.webp"
     },
     {
@@ -76,15 +76,11 @@ export default function LeadershipTeam() {
                             I created the Traveler DNA framework to bridge that gap. At our Toronto B2B Innovation Hub, we use architectural precision to build the tech that orchestrates the world. Our mission is to provide the intelligence that makes travel feel like home for the U.S. and international markets served by our partners at TravelOne Global Travel Services LLC (USA).
                         </p>
 
-                        {/* <p className="text-base md:text-lg text-black leading-relaxed max-w-xl">
-                            I created TravelOne to bridge that gap. We use architectural precision to orchestrate the world, but we use your 30-Marker Persona to make it feel like home.
-                        </p> */}
-
                         <p className="text-base md:text-lg text-black leading-relaxed max-w-xl">
                             Welcome to the future of travel. Welcome to TravelOne.
                         </p>
 
-                        <div className="flex justify-center lg:justify-start">
+                        {/* <div className="flex justify-center lg:justify-start">
                             <Link
                                 href="https://www.linkedin.com/in/bhavinofficial/"
                                 rel="nofollow"
@@ -93,7 +89,7 @@ export default function LeadershipTeam() {
                             >
                                 <Linkedin className="w-5 h-5" />
                             </Link>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-8">

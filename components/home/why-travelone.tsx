@@ -5,22 +5,22 @@ const features = [
     {
         icon: MapPin,
         heading: "The 30-Marker Data Asset",
-        text: "Your unique Traveler DNA is recorded once to automate perfect planning for a lifetime of journeys.",
+        text: "Your unique Traveler DNA is recorded once to automate perfect planning for a lifetime of journeys. Our proprietary intelligence eliminates the noise, delivering only what resonates with you.",
     },
     {
         icon: Clock10,
         heading: "Architectural Precision",
-        text: "We don’t use templates. Every itinerary is built from scratch, synchronized 100% with your recorded persona data.",
+        text: "We don't use templates. Every itinerary is built from scratch by the TravelOne USA platform, synchronized 100% with your recorded persona data.",
     },
     {
         icon: Lock,
         heading: "Unified Institutional Security",
-        text: "One secure transaction managed by TravelOne Services (USA) as your official Merchant of Record.",
+        text: "Enjoy the peace of mind of a single, secure transaction managed exclusively by TravelOne Global Travel Services LLC (USA) as your official Merchant of Record (MoR).",
     },
     {
         icon: CheckCircle,
         heading: "Total Accountability",
-        text: "We own the end-to-end experience, managing every logistical detail of your journey from departure to return.",
+        text: "TravelOne USA owns the end-to-end service experience, overseeing the logistical details of your journey from departure to return.",
     },
 ];
 

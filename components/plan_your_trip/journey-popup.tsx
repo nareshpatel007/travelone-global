@@ -80,6 +80,7 @@ export function StartJourneyModal({
     const [formLoader, setFormLoader] = useState(false);
     const [personaCities, setPersonaCities] = useState<any>(null);
     const [personaResult, setPersonaResult] = useState<any>(null);
+    const [disableSubmit, setDisableSubmit] = useState(false);
 
     // Get cookie value
     const cookieLeadId = getCookieData("lead_id");
@@ -434,6 +435,11 @@ export function StartJourneyModal({
         }
     };
 
+    // Handle disable button
+    const handleDisableButton = (isDisabled: boolean) => {
+        setDisableSubmit(isDisabled);
+    };
+
     // Handle close
     const handleClose = () => {
         setStep(0);
@@ -447,7 +453,7 @@ export function StartJourneyModal({
 
     if (!open) return null;
 
-    const btnBase = "flex items-center justify-center gap-2 w-full md:w-auto px-6 py-2 rounded-sm font-medium border border-black transition cursor-pointer disabled:opacity-50";
+    const btnBase = "flex items-center justify-center gap-2 w-full md:w-auto px-6 py-2 rounded-sm font-medium border border-black transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed";
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center">
@@ -480,12 +486,21 @@ export function StartJourneyModal({
                                 selectedCountry={selectedCountry}
                                 personaCities={personaCities}
                                 personaResult={personaResult}
+                                handleDisableButton={handleDisableButton}
                             />
                         )}
 
+                        {/* Errors */}
                         {errors && (
-                            <p className="text-center text-red-600">
+                            <p className="text-center text-base text-red-600">
                                 {errors}
+                            </p>
+                        )}
+
+                        {/* Disable submit */}
+                        {disableSubmit && (
+                            <p className="text-center text-base text-red-600">
+                                TravelOne Global Travel Services, LLC (USA) does not market to or provide travel services to residents of Ontario, Canada. This platform is strictly for the U.S. and international markets. For technology inquiries, please visit travelone.io.
                             </p>
                         )}
 
@@ -493,7 +508,7 @@ export function StartJourneyModal({
                             {/* START */}
                             {step === 0 && !isAuthLogin && (
                                 <button
-                                    disabled={formLoader}
+                                    disabled={formLoader || disableSubmit}
                                     onClick={handleNextStep}
                                     className={`${btnBase} bg-black text-white border-black hover:bg-white hover:text-black`}
                                 >
@@ -504,6 +519,7 @@ export function StartJourneyModal({
 
                             {step > (isAuthLogin ? 0 : 1) && !formLoader && (
                                 <button
+                                    disabled={disableSubmit}
                                     onClick={() => setStep(step - 1)}
                                     className={`${btnBase} bg-white border-black hover:bg-black hover:text-white`}
                                 >
@@ -513,7 +529,7 @@ export function StartJourneyModal({
 
                             {(step > 0 || isAuthLogin) && CurrentStepKey !== "summary" && (
                                 <button
-                                    disabled={formLoader}
+                                    disabled={formLoader || disableSubmit}
                                     onClick={handleNextStep}
                                     className={`${btnBase} bg-black text-white hover:bg-white hover:text-black`}
                                 >
@@ -535,7 +551,7 @@ export function StartJourneyModal({
 
                             {CurrentStepKey === "summary" && (
                                 <button
-                                    disabled={formLoader}
+                                    disabled={formLoader || disableSubmit}
                                     onClick={handleSubmit}
                                     className={`${btnBase} bg-black text-white hover:bg-black/80`}
                                 >

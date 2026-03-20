@@ -25,7 +25,7 @@ export default function AboutBhavin() {
                     </h2>
 
                     <p className="text-black text-base sm:text-lg leading-relaxed">
-                        Bhavin Vora | Founder & CEO
+                        Bhavin Vora | Founder & CEO - TravelOne Technologies Inc. (Canada)
                     </p>
 
                     <p className="text-black text-base sm:text-lg leading-relaxed">
@@ -33,13 +33,13 @@ export default function AboutBhavin() {
                     </p>
 
                     {/* Social Icons */}
-                    <div className="flex justify-center lg:justify-start gap-4 pt-4">
+                    {/* <div className="flex justify-center lg:justify-start gap-4 pt-4">
                         <Link href="https://www.linkedin.com/in/bhavinofficial/" rel="nofollow" target="_blank">
                             <span className="w-10 h-10 rounded-full bg-amber-50 text-black border hover:bg-black hover:text-white flex items-center justify-center cursor-pointer">
                                 <Linkedin className="h-5 w-5" />
                             </span>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

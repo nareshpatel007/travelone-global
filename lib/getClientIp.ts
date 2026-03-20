@@ -1,6 +1,5 @@
 "use server";
 
-import { headers } from "next/headers";
 import { cookies } from "next/headers";
 
 export async function getClientIp(): Promise<string | null> {

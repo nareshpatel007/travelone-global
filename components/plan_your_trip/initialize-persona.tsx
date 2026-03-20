@@ -54,6 +54,7 @@ export function InitializePersonaModal({ open, onOpenChange }: Props) {
     const [errors, setErrors] = useState<string>("");
     const [leadId, setLeadId] = useState<string>("");
     const [formLoader, setFormLoader] = useState(false);
+    const [disableSubmit, setDisableSubmit] = useState(false);
 
     // Get login data
     const isAuthLogin = isLoggedIn();
@@ -67,6 +68,11 @@ export function InitializePersonaModal({ open, onOpenChange }: Props) {
         onOpenChange(false);
         setFormLoader(false);
     }
+
+    // Handle disable button
+    const handleDisableButton = (isDisabled: boolean) => {
+        setDisableSubmit(isDisabled);
+    };
 
     // Validate step
     const validateStep = () => {
@@ -374,7 +380,7 @@ export function InitializePersonaModal({ open, onOpenChange }: Props) {
     const CurrentStepKey = stepsKey[step];
 
     // Define button basic class
-    const btnBase = "flex items-center justify-center gap-2 w-full md:w-auto " + "px-4 md:px-8 py-2 md:py-2.5 rounded-sm font-medium border cursor-pointer transition " + "disabled:opacity-50 disabled:cursor-not-allowed";
+    const btnBase = "flex items-center justify-center gap-2 w-full md:w-auto px-4 md:px-8 py-2 md:py-2.5 rounded-sm font-medium border cursor-pointer transition disabled:opacity-50 disabled:cursor-not-allowed";
 
     // If not open
     if (!open) return null;
@@ -407,14 +413,22 @@ export function InitializePersonaModal({ open, onOpenChange }: Props) {
                                 setPlanYourTripForm={setPlanYourTripForm}
                                 jumpToStep={jumpToStep}
                                 isLandingPage={true}
+                                handleDisableButton={handleDisableButton}
                             />
                         )}
 
-                        {/* Error */}
+                        {/* Errors */}
                         {errors && (
-                            <div className="text-center">
-                                <p className="text-red-600 text-sm md:text-base">{errors}</p>
-                            </div>
+                            <p className="text-center text-base text-red-600">
+                                {errors}
+                            </p>
+                        )}
+
+                        {/* Disable submit */}
+                        {disableSubmit && (
+                            <p className="text-center text-base text-red-600">
+                                TravelOne Global Travel Services, LLC (USA) does not market to or provide travel services to residents of Ontario, Canada. This platform is strictly for the U.S. and international markets. For technology inquiries, please visit travelone.io.
+                            </p>
                         )}
 
                         {/* Navigation */}
@@ -422,7 +436,7 @@ export function InitializePersonaModal({ open, onOpenChange }: Props) {
                             {/* START */}
                             {step === 0 && !isAuthLogin && (
                                 <button
-                                    disabled={formLoader}
+                                    disabled={formLoader || disableSubmit}
                                     onClick={handleNextStep}
                                     className={`${btnBase} bg-black text-white border-black hover:bg-white hover:text-black`}
                                 >
@@ -445,7 +459,7 @@ export function InitializePersonaModal({ open, onOpenChange }: Props) {
                             {/* NEXT */}
                             {(step > 0 || isAuthLogin) && CurrentStepKey !== "question_10" && (
                                 <button
-                                    disabled={formLoader}
+                                    disabled={formLoader || disableSubmit}
                                     onClick={() => {
                                         handleNextStep();
                                         autoSaveQuestion();
@@ -459,7 +473,7 @@ export function InitializePersonaModal({ open, onOpenChange }: Props) {
                             {/* SUBMIT */}
                             {CurrentStepKey === "question_10" && (
                                 <button
-                                    disabled={formLoader}
+                                    disabled={formLoader || disableSubmit}
                                     onClick={handlSubmitPlanYourTrip}
                                     className={`${btnBase} bg-black text-white border-black hover:bg-white hover:text-black`}
                                 >

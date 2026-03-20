@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function TeamSection() {
     return (
         <>
-            <section className="bg-white py-12 space-y-12">
+            {/* <section className="bg-white py-12 space-y-12">
                 <div className="max-w-7xl mx-auto px-5 sm:px-0 space-y-12">
                     <div className="max-w-5xl mx-auto text-center space-y-4">
                         <div className="space-y-1">
@@ -42,18 +42,18 @@ export default function TeamSection() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
             <section className="bg-white py-12 space-y-12">
                 <div className="max-w-7xl mx-auto px-5 sm:px-0 space-y-12">
                     <div className="max-w-5xl mx-auto text-center space-y-4">
                         <div className="space-y-1">
                             <h2 className="text-3xl md:text-6xl leading-tight font-normal">
-                                On-Ground Intelligence<br />(Global Strategic Zones)
+                                On-Ground Intelligence:<br />A Global Execution Network
                             </h2>
                         </div>
 
                         <p className="text-black text-base sm:text-lg leading-relaxed">
-                            We have built a dedicated support network across the globe. These aren't just partners; they are local intelligence units who feed real-world, real-time data back into our AI to ensure our "Local Soul" remains accurate.
+                            TravelOne bridges the gap between AI and human expertise. Our ecosystem is powered by a vetted network of tier-one Destination Management Companies (DMCs) and local specialists who provide the on-ground execution for our global travelers.
                         </p>
                     </div>
 
@@ -62,17 +62,17 @@ export default function TeamSection() {
                         {[
                             {
                                 title: "The Asian Frontier",
-                                text: "Specialist teams in Japan, South Korea, Vietnam, Indonesia, Thailand, and India.",
+                                text: "Specialist DMC partners in Japan, South Korea, Vietnam, Indonesia, Thailand, and India.",
                                 image: "https://ik.imagekit.io/288weifiq/nextjs/china-arch_1127-3673.jpg",
                             },
                             {
                                 title: "The European Heartland",
-                                text: "Local experts across Italy, Spain, Portugal, Greece, France, and Switzerland.",
+                                text: "Local execution experts across Italy, Spain, Portugal, Greece, France, and Switzerland.",
                                 image: "https://ik.imagekit.io/288weifiq/nextjs/munich-marienplatz_181624-9114.jpg",
                             },
                             {
                                 title: "The Nordic & Arctic Circles",
-                                text: "Navigational experts in Norway, Iceland, Denmark, Sweden, and Finland.",
+                                text: "Navigational masters in Norway, Iceland, Denmark, Sweden, and Finland.",
                                 image: "https://ik.imagekit.io/288weifiq/nextjs/norway/view-red-cottages-by-coastline-hamnoy-lofoten-islands-norway_181624-33160.jpg?updatedAt=1768983789930",
                             },
                             {
@@ -82,7 +82,7 @@ export default function TeamSection() {
                             },
                             {
                                 title: "The North American Home",
-                                text: "Comprehensive logistical support across Canada and the USA.",
+                                text: "Managed by TravelOne USA, providing comprehensive logistical support and DMC orchestration across the United States and international corridors.",
                                 image: "https://ik.imagekit.io/288weifiq/nextjs/canada/niagara-falls-panorama_649448-3341.jpg?updatedAt=1768983789942",
                             },
                         ].map((region, index) => (

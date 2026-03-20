@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const ALLOWED_ORIGIN = "https://travelone.io";
+const ALLOWED_ORIGIN = "https://traveloneglobal.com";
 
 export async function POST(req: NextRequest) {
     try {

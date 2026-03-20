@@ -8,19 +8,23 @@ import "react-international-phone/style.css";
 interface Props {
     planYourTripForm: any;
     setPlanYourTripForm: React.Dispatch<React.SetStateAction<any>>;
+    handleDisableButton: (disabled: boolean) => void;
 }
 
 export default function StepLeadForm({
     planYourTripForm,
     setPlanYourTripForm,
+    handleDisableButton
 }: Props) {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [mobile, setMobile] = useState("");
     const [communication, setCommunication] = useState("");
     const [acceptPrivacy, setAcceptPrivacy] = useState(false);
+    const [countryProvince, setCountryProvince] = useState<string>("");
+    const [userCountry, setUserCountry] = useState<string>("");
 
-    // ✅ Restore values when coming back to this step
+    // Restore values when coming back to this step
     useEffect(() => {
         if (planYourTripForm?.full_name) {
             setFullName(planYourTripForm.full_name);
@@ -38,6 +42,13 @@ export default function StepLeadForm({
             setAcceptPrivacy(planYourTripForm.privacy_policy_accepted);
         }
     }, [planYourTripForm]);
+
+    // If choose province
+    useEffect(() => {
+        if (typeof handleDisableButton === "function") {
+            handleDisableButton(countryProvince === "Ontario");
+        }
+    }, [countryProvince]);
 
     const updateForm = (key: string, value: any) => {
         setPlanYourTripForm((prev: any) => ({
@@ -91,15 +102,45 @@ export default function StepLeadForm({
                         <PhoneInput
                             defaultCountry="us"
                             value={mobile}
-                            onChange={(e) => {
-                                setMobile(e);
-                                updateForm("mobile", e);
+                            onChange={(value: any, data: any) => {
+                                setMobile(value);
+                                updateForm("mobile", value);
+                                setUserCountry(data?.country?.iso2);
                             }}
                             placeholder="Enter your phone number"
                             className="w-full rounded-sm py-0.5 px-3 text-sm md:text-md text-black font-medium bg-white border border-black"
                             inputClassName="w-full !border-0 text-sm md:text-md !border-white"
                         />
                     </div>
+
+                    {userCountry && userCountry == 'ca' && <>
+                        <div className="space-y-1">
+                            <label className="block text-md text-black">
+                                Choose Province <span className="text-red-500">*</span>
+                            </label>
+                            <select
+                                className="w-full px-4 py-2 rounded-sm border border-[#2F5D50] bg-white outline-none"
+                                onChange={(e) => {
+                                    setCountryProvince(e.target.value);
+                                }}
+                            >
+                                <option value="">Select province</option>
+                                <option value="Alberta">Alberta</option>
+                                <option value="British Columbia">British Columbia</option>
+                                <option value="Manitoba">Manitoba</option>
+                                <option value="New Brunswick">New Brunswick</option>
+                                <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                                <option value="Northwest Territories">Northwest Territories</option>
+                                <option value="Nova Scotia">Nova Scotia</option>
+                                <option value="Nunavut">Nunavut</option>
+                                <option value="Ontario">Ontario</option>
+                                <option value="Prince Edward Island">Prince Edward Island</option>
+                                <option value="Quebec">Quebec</option>
+                                <option value="Saskatchewan">Saskatchewan</option>
+                            </select>
+                        </div>
+                    </>}
+
                     <div className="space-y-1">
                         <label className="block text-md text-black">
                             Preferred Method of Communication <span className="text-red-500">*</span>
@@ -119,6 +160,7 @@ export default function StepLeadForm({
                         </select>
                     </div>
                 </div>
+
                 <div className="flex items-start gap-2 pt-2">
                     <input
                         type="checkbox"

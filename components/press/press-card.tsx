@@ -56,11 +56,11 @@ export default function PressSingleCard({ data, index }: Props) {
 
                     <Link href={data?.link || "#"} target="_blank">
                         <button className="flex items-center gap-2 bg-black border border-black text-base text-white px-6 py-2 rounded font-medium hover:bg-white hover:text-black transition cursor-pointer">
-                            Read Full Article <ExternalLink className="w-5 h-5" />
+                            Explore Our Global Impact <ExternalLink className="w-5 h-5" />
                         </button>
                     </Link>
 
-                    <p className="text-base max-w-3xl">
+                    <p className="text-xs mt-5 text-black">
                         Showcasing the global innovation developed at our Toronto-based B2B Research & Development Hub.
                     </p>
                 </div>

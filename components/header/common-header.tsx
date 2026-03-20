@@ -137,7 +137,7 @@ export default function CommonHeader({ landingPytrip = false }: Props) {
                             </Link>
 
                             <Link
-                                href="https://www.instagram.com/travelone.io/"
+                                href="https://www.instagram.com/travelone.global/"
                                 target="_blank"
                                 rel="nofollow"
                                 className="flex items-center gap-1.5 hover:underline underline-offset-4"
@@ -146,7 +146,7 @@ export default function CommonHeader({ landingPytrip = false }: Props) {
                                 Instagram
                             </Link>
 
-                            <Link
+                            {/* <Link
                                 href="https://www.linkedin.com/company/traveloneio/"
                                 target="_blank"
                                 rel="nofollow"
@@ -154,7 +154,7 @@ export default function CommonHeader({ landingPytrip = false }: Props) {
                             >
                                 <Linkedin className="w-3.5 h-3.5 text-blue-500" />
                                 LinkedIn
-                            </Link>
+                            </Link> */}
                         </div>
 
                         {/* Search form */}
@@ -201,7 +201,6 @@ export default function CommonHeader({ landingPytrip = false }: Props) {
                             </button>
                         </Link>
                         <Link className="hover:underline underline-offset-5 cursor-pointer" onMouseEnter={closeMegaMenu} href="/tour">Experiences</Link>
-                        {/* <Link className="hover:underline underline-offset-5 cursor-pointer" onMouseEnter={closeMegaMenu} href="/intelligence">Persona-Led Travel</Link> */}
                         <Link className="hover:underline underline-offset-5 cursor-pointer" onMouseEnter={closeMegaMenu} href="/press">Press</Link>
                         <Link className="hover:underline underline-offset-5 cursor-pointer" onMouseEnter={closeMegaMenu} href="/about">About</Link>
                         <Link className="hover:underline underline-offset-5 cursor-pointer" onMouseEnter={closeMegaMenu} href="/contact">Contact</Link>
@@ -384,7 +383,6 @@ export default function CommonHeader({ landingPytrip = false }: Props) {
                         <Link href="/">Home</Link>
                         <Link href="/country">Collections</Link>
                         <Link href="/tour">Experiences</Link>
-                        {/* <Link href="/intelligence">Persona-Led Travel</Link> */}
                         <Link href="/press">Press</Link>
                         <Link href="/about">About</Link>
                         <Link href="/contact">Contact</Link>
