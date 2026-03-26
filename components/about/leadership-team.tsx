@@ -1,35 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { Linkedin } from "lucide-react";
 
 // Leadership Team
 const leadership = [
-    // {
-    //     name: "Vipul Shah",
-    //     role: "Chief Technology Officer (CTO) - TravelOne Technologies Inc. (Canada)",
-    //     image: "/about/img_team_63e33ba779f7f6-39405930-32732924.webp"
-    // },
-    {
-        name: "Pranav Amin",
-        role: "CEO - TravelOne Global Travel Services (USA)",
-        image: "/about/img_team_63e33bb2382cf1-81493713-48358927.webp"
-    },
-    // {
-    //     name: "Michael Bronfman",
-    //     role: "Regional Director of Growth - Canada",
-    //     image: "/about/img_team_63e33bceb55f81-24897182-80425447.webp"
-    // },
-    // {
-    //     name: "Naresh Patel",
-    //     role: " Lead Systems Architect - India",
-    //     image: "/about/img_team_674b22f265e656-43103817-78454512.webp"
-    // },
     {
         name: "Louise Berg",
-        // role: "Head of Destination Strategy & Social - Germany",
-        role: "Head of Global Data & Destination Insights (USA)",
+        role: "Head of Global Destination Insights - USA",
         image: "/about/img_team_63e33bbf427638-77996729-78363986.webp"
     },
     {
@@ -44,16 +21,81 @@ export default function LeadershipTeam() {
         <section className="py-12 bg-white">
             <div className="max-w-7xl mx-auto px-5 md:px-0 space-y-15">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div className="flex justify-center items-center">
+                        <div className="relative h-150 rounded-xl overflow-hidden">
+                            <Image
+                                src="/about/pranav-amin.jpg"
+                                alt="Pranav Amin"
+                                width={500}
+                                height={900}
+                                quality={100}
+                                draggable={false}
+                                className="rounded-3xl relative z-10 object-cover border border-[#d9cec1]"
+                            />
+                        </div>
+                    </div>
+
+                    {/* CONTENT */}
+                    <div className="space-y-4 text-center lg:text-left">
+                        <h2 className="text-3xl md:text-6xl leading-tight font-normal">
+                            The Gold Standard of Execution
+                        </h2>
+
+                        <h3 className="text-lg font-medium text-black">
+                            Hi, I’m Pranav Amin. CEO — TravelOne Global Travel Services LLC (USA)
+                        </h3>
+
+                        <p className="text-base md:text-lg text-black leading-relaxed max-w-xl">
+                            With decades of deep-rooted experience in the global travel industry, I’ve seen firsthand how the gap between "booking" and "experiencing" has widened. While technology provides the map, it takes human expertise and operational excellence to navigate the journey.
+                        </p>
+
+                        <p className="text-base md:text-lg text-black leading-relaxed max-w-xl">
+                            As head of our U.S. headquarters, I lead the delivery of Persona-Led Journeys. My focus is ensuring that every itinerary we orchestrate is backed by a robust, secure, and world-class service infrastructure. By leveraging the advanced intelligence built by our partners at TravelOne Technologies Inc. (Canada), we turn data into high-touch travel reality for our clients worldwide.
+                        </p>
+
+                        <p className="text-base md:text-lg text-black leading-relaxed max-w-xl">
+                            We don’t just process trips; we manage the integrity of your travel experience.
+                        </p>
+                        
+                        <p className="text-base md:text-lg text-black leading-relaxed max-w-xl">
+                            Experience the Orchestration. Welcome to TravelOne Global.
+                        </p>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {leadership.map((member, index) => (
+                        <div key={index} className="text-center space-y-6">
+                            <div className="relative flex justify-center">
+                                <div className="absolute -inset-2 rounded-lg bg-[#FFF9EE] border border-amber-200 opacity-90 blur-[1px]" />
+                                <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-lg overflow-hidden">
+                                    <Image
+                                        src={member.image}
+                                        alt={member.name}
+                                        fill
+                                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                    />
+                                </div>
+                            </div>
+                            <div className="space-y-0">
+                                <p className="font-semibold text-md md:text-lg text-black">{member.name}</p>
+                                <p className="text-sm md:text-base text-black">{member.role}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     {/* IMAGE */}
                     <div className="flex justify-center items-center">
-                        <div className="relative h-[280px] md:h-[380px] aspect-square rounded-xl overflow-hidden">
+                        <div className="relative h-full rounded-xl overflow-hidden">
                             <Image
-                                src="https://ik.imagekit.io/288weifiq/nextjs/bhavin-vora.jpeg"
+                                src="/common/bhavin-vora.jpg"
                                 alt="Bhavin Vora"
-                                fill
-                                className="object-cover"
-                                priority
-                                sizes="(max-width: 768px) 280px, 380px"
+                                width={500}
+                                height={700}
+                                draggable={false}
+                                className="rounded-3xl relative z-10 object-cover border border-[#d9cec1]"
                             />
                         </div>
                     </div>
@@ -79,39 +121,7 @@ export default function LeadershipTeam() {
                         <p className="text-base md:text-lg text-black leading-relaxed max-w-xl">
                             Welcome to the future of travel. Welcome to TravelOne.
                         </p>
-
-                        {/* <div className="flex justify-center lg:justify-start">
-                            <Link
-                                href="https://www.linkedin.com/in/bhavinofficial/"
-                                rel="nofollow"
-                                target="_blank"
-                                className="inline-flex items-center gap-2 border border-black rounded-full p-3 hover:bg-black hover:text-white transition"
-                            >
-                                <Linkedin className="w-5 h-5" />
-                            </Link>
-                        </div> */}
                     </div>
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-                    {leadership.map((member, index) => (
-                        <div key={index} className="text-center space-y-6">
-                            <div className="relative flex justify-center">
-                                <div className="absolute -inset-2 rounded-lg bg-[#FFF9EE] border border-amber-200 opacity-90 blur-[1px]" />
-                                <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-lg overflow-hidden">
-                                    <Image
-                                        src={member.image}
-                                        alt={member.name}
-                                        fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                    />
-                                </div>
-                            </div>
-                            <div className="space-y-0">
-                                <p className="font-semibold text-md md:text-lg text-black">{member.name}</p>
-                                <p className="text-sm md:text-base text-black">{member.role}</p>
-                            </div>
-                        </div>
-                    ))}
                 </div>
             </div>
         </section>

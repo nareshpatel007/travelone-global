@@ -56,7 +56,7 @@ export default function CityPortfolios({ country, cities }: Props) {
                     <section
                         id={hub?.name.toLowerCase()}
                         key={hub?.name}
-                        className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[40%_60%] gap-6"
+                        className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[45%_55%] gap-6"
                     >
                         <div className="relative">
                             <div className="relative w-full h-[260px] sm:h-[320px] md:h-[380px] lg:h-full lg:min-h-[420px] rounded-xl overflow-hidden">
@@ -68,19 +68,29 @@ export default function CityPortfolios({ country, cities }: Props) {
                                     className="object-cover"
                                 />
 
-                                <div className="absolute inset-0 bg-black/10" />
+                                {/* <div className="absolute inset-0 bg-black/10" /> */}
 
-                                <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4 sm:px-6 space-y-2 sm:space-y-3">
+                                {/* <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4 sm:px-6 space-y-2 sm:space-y-3">
                                     <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium">
                                         {hub?.name}
                                     </h3>
                                     <p className="text-sm md:text-base text-white/90">
                                         {hub?.vibe_logic}
                                     </p>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className="bg-white/80 backdrop-blur rounded-xl border border-black/10 overflow-hidden">
+                            {/* Heading */}
+                            <div className="px-4 sm:px-6 py-5 border-b space-y-3 border-black/10">
+                                <h3 className="text-2xl md:text-3xl font-medium">
+                                    {hub?.name}
+                                </h3>
+                                <p className="text-sm md:text-base text-black">
+                                    {hub?.vibe_logic}
+                                </p>
+                            </div>
+
                             {/* Stay */}
                             {hub?.stays && hub?.stays.length > 0 && (
                                 <div className="flex flex-col md:flex-row gap-3 md:gap-4 px-4 sm:px-6 py-5 border-b border-black/10">
@@ -93,7 +103,7 @@ export default function CityPortfolios({ country, cities }: Props) {
                                         {hub?.stays?.map((stay: any, index: number) => (
                                             <span
                                                 key={index}
-                                                className="px-3 py-1 rounded-full bg-gray-100 text-sm font-medium text-black"
+                                                className="px-3 py-1 rounded-full bg-gray-100 text-black text-sm font-medium hover:bg-gray-200 transition"
                                             >
                                                 {stay}
                                             </span>
@@ -107,37 +117,16 @@ export default function CityPortfolios({ country, cities }: Props) {
                                 <div className="flex flex-col md:flex-row gap-3 md:gap-4 px-4 sm:px-6 py-5 border-b border-black/10">
                                     <div className="md:w-1/4">
                                         <p className="text-sm tracking-[0.15em] uppercase font-medium text-black">
-                                            Places to Visit
+                                            Experiences
                                         </p>
                                     </div>
                                     <div className="flex flex-wrap gap-2 md:w-3/4">
                                         {hub?.place_to_visit?.map((place: any, index: number) => (
                                             <span
                                                 key={index}
-                                                className="px-3 py-1 rounded-full bg-green-50 text-green-700 text-sm font-medium"
+                                                className="px-3 py-1 rounded-full bg-green-50 text-green-700 text-sm font-medium hover:bg-green-100 transition"
                                             >
                                                 {place}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Things */}
-                            {hub?.thing_to_do && hub?.thing_to_do.length > 0 && (
-                                <div className="flex flex-col md:flex-row gap-3 md:gap-4 px-4 sm:px-6 py-5">
-                                    <div className="md:w-1/4">
-                                        <p className="text-sm tracking-[0.15em] uppercase font-medium text-black">
-                                            Things to Do
-                                        </p>
-                                    </div>
-                                    <div className="flex flex-wrap gap-2 md:w-3/4">
-                                        {hub?.thing_to_do?.map((thing: any, index: number) => (
-                                            <span
-                                                key={index}
-                                                className="px-3 py-1 rounded-full bg-green-50 text-green-700 text-sm font-medium"
-                                            >
-                                                {thing}
                                             </span>
                                         ))}
                                     </div>

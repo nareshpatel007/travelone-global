@@ -51,11 +51,11 @@ export default function HomeHeader() {
             <div className="hidden md:flex lg:flex px-4 md:px-8 h-20 md:h-24 items-center space-x-7">
                 <Link href="/">
                     <Image
-                        src="/common/logo.webp"
+                        src="/common/logo.png"
                         alt="Logo"
                         width={160}
                         height={100}
-                        className="cursor-pointer w-32 md:w-40"
+                        className="cursor-pointer w-32 md:w-41"
                         draggable="false"
                     />
                 </Link>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle, Loader2, Plus, X } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import QuestionHeading from "@/components/plan_your_trip/common/questionHeading";
@@ -75,6 +75,9 @@ export function BookingCart({ tour, selectedPackage, open, onOpenChange }: Props
     const [selectedDate, setSelectedDate] = useState<string>("");
     const [availableSeats, setAvailableSeats] = useState<number>(0);
     const [activeRoomIndex, setActiveRoomIndex] = useState(0);
+    const [disableSubmit, setDisableSubmit] = useState(false);
+    const [countryProvince, setCountryProvince] = useState<string>("");
+    const [userCountry, setUserCountry] = useState<string>("");
     const [rooms, setRooms] = useState<Room[]>([
         {
             id: 1,
@@ -94,6 +97,11 @@ export function BookingCart({ tour, selectedPackage, open, onOpenChange }: Props
     const is_logged_in = isLoggedIn();
     const login_user = getLoginCookie();
 
+    // If choose province
+    useEffect(() => {
+        setDisableSubmit(countryProvince === "Ontario");
+    }, [countryProvince]);
+
     // Handle close
     const handleClose = () => {
         onOpenChange(false);
@@ -101,6 +109,10 @@ export function BookingCart({ tour, selectedPackage, open, onOpenChange }: Props
         setSelectedNationality(null);
         setSelectedDate("");
         setAvailableSeats(0);
+        setDisableSubmit(false);
+        setCountryProvince("");
+        setUserCountry("");
+        setErrors("");
     }
 
     // Check if date is in the future
@@ -368,11 +380,44 @@ export function BookingCart({ tour, selectedPackage, open, onOpenChange }: Props
                                             defaultCountry="us"
                                             placeholder="Enter your phone number"
                                             value={userPhone}
-                                            onChange={(e) => setUserPhone(e)}
-                                            className="w-full px-4 py-1 text-base rounded-sm border border-[#2F5D50] bg-white outline-none"
+                                            onChange={(value: any, data: any) => {
+                                                setUserPhone(value);
+                                                setUserCountry(data?.country?.iso2);
+                                                setCountryProvince('');
+                                                setDisableSubmit(false);
+                                            }}
+                                            className="w-full px-4 py-0.5 text-base rounded-sm border border-[#2F5D50] bg-white outline-none"
                                             inputClassName="w-full !border-0 text-sm md:text-md !border-white"
                                         />
                                     </div>
+
+                                    {userCountry && userCountry == 'ca' && <>
+                                        <div>
+                                            <label className="block text-md font-medium text-[#333] mb-1">
+                                                Choose Province <span className="text-red-500">*</span>
+                                            </label>
+                                            <select
+                                                className="w-full px-4 py-2 text-base rounded-sm border border-[#2F5D50] bg-white outline-none"
+                                                onChange={(e) => {
+                                                    setCountryProvince(e.target.value);
+                                                }}
+                                            >
+                                                <option value="">Select province</option>
+                                                <option value="Alberta">Alberta</option>
+                                                <option value="British Columbia">British Columbia</option>
+                                                <option value="Manitoba">Manitoba</option>
+                                                <option value="New Brunswick">New Brunswick</option>
+                                                <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                                                <option value="Northwest Territories">Northwest Territories</option>
+                                                <option value="Nova Scotia">Nova Scotia</option>
+                                                <option value="Nunavut">Nunavut</option>
+                                                <option value="Ontario">Ontario</option>
+                                                <option value="Prince Edward Island">Prince Edward Island</option>
+                                                <option value="Quebec">Quebec</option>
+                                                <option value="Saskatchewan">Saskatchewan</option>
+                                            </select>
+                                        </div>
+                                    </>}
                                 </div>}
 
                                 <div className={`grid ${!is_logged_in ? "border-t border-dashed border-gray-300 mt-6 pt-4 grid-cols-1 md:grid-cols-2" : "grid-cols-1"} gap-4 md:gap-6`}>
@@ -532,15 +577,24 @@ export function BookingCart({ tour, selectedPackage, open, onOpenChange }: Props
                         )}
                     </div>
 
+                    {/* Error */}
                     {errors && (
-                        <span className="text-red-500">{errors}</span>
+                        <span className="text-base text-red-500">{errors}</span>
+                    )}
+
+                    {/* Disable submit */}
+                    {disableSubmit && (
+                        <p className="text-center max-w-4xl mx-auto text-base text-red-500">
+                            TravelOne Global Travel Services, LLC (USA) does not market to or provide travel services to residents of Ontario, Canada. This platform is strictly for the U.S. and international markets. For technology inquiries, please visit travelone.io.
+                        </p>
                     )}
 
                     <div className="flex items-center gap-3">
                         {currentStep === 1 ? (
                             <button
                                 onClick={handleNextStep}
-                                className="flex items-center gap-2 px-8 py-2.5 rounded-md font-medium transition-colors border border-black/50 cursor-pointer bg-black text-white hover:text-black hover:bg-white"
+                                disabled={disableSubmit}
+                                className="flex items-center gap-2 px-8 py-2.5 rounded-md font-medium transition-colors border border-black/50 cursor-pointer bg-black text-white hover:text-black hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 Next <ArrowRight className="h-5 w-5" />
                             </button>
@@ -555,7 +609,7 @@ export function BookingCart({ tour, selectedPackage, open, onOpenChange }: Props
 
                                 <button
                                     onClick={handleSubmit}
-                                    disabled={isFormLoading}
+                                    disabled={isFormLoading || disableSubmit}
                                     className="flex items-center gap-2 px-8 py-2.5 rounded-md font-medium transition-colors border cursor-pointer bg-black text-white hover:text-black hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isFormLoading && <Loader2 className="animate-spin h-5 w-5" />}

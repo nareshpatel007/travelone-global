@@ -10,43 +10,43 @@ import { ChevronDown } from "lucide-react";
 const data = [
     {
         question: "What is TravelOne?",
-        answer: "TravelOne is a global AI-driven travel orchestration platform. We utilize a proprietary 30-Marker Traveler DNA framework to connect international travelers with a vetted network of premier travel providers, hotels, and tour operators.",
+        answer: "TravelOne is a premier U.S.-based travel orchestration platform. We utilize a proprietary 30-Marker Traveler DNA framework—architected by our partners at TravelOne Technologies Inc.—to connect international travelers with a vetted network of premier providers, hotels, and tour operators.",
     },
     {
-        question: "How does TravelOne work?",
-        answer: "Our platform, architected by our B2B Tech Hub in Toronto, aggregates global travel products into a synchronized ecosystem. This allows travelers to skip traditional search bars and receive itineraries perfectly matched to their Persona. All travel fulfillment and financial transactions are managed exclusively by TravelOne Global Travel Services LLC (USA).",
+        question: "Who manages my travel bookings and payments?",
+        answer: `All travel counseling, bookings, and financial transactions are managed exclusively by TravelOne Global Travel Services LLC, a United States-incorporated entity and the designated Merchant of Record (MoR). While our core "Traveler DNA" technology is developed by our partners in Canada, all travel-related services and contracts are governed by U.S. law.`,
     },
     {
-        question: "Can TravelOne provide the best travel deals?",
-        answer: 'Yes. Our AI engine scans our global partner network in real-time to surface the highest-value options. This is particularly effective for bespoke packages and luxury stays where our "DNA" matching ensures you get the right value for your specific travel style.',
+        question: "Is TravelOne registered with TICO (Ontario)?",
+        answer: `No. TravelOne Global Travel Services LLC is a foreign entity incorporated in the United States. We do not provide travel counseling or travel services from within Ontario, Canada. Consequently, we are not registered with the Travel Industry Council of Ontario (TICO), and transactions are not covered by the Ontario Travel Industry Compensation Fund.`,
     },
     {
-        question: "Is my data safe on TravelOne?",
-        answer: "Absolutely. We utilize AES-256 encryption and architectural siloing. Your financial data is handled by the U.S. Merchant of Record and is never accessible to the AI systems in our Canadian tech hub. We comply with global privacy standards, including GDPR, CCPA, and PIPEDA.",
+        question: `How does the "Traveler DNA" work?`,
+        answer: `Our platform uses architectural precision to skip traditional search bars. By decoding your unique Traveler DNA, we orchestrate itineraries perfectly matched to your persona. This high-fidelity matching is powered by the intelligence engine built at our Toronto B2B Innovation Hub.`,
     },
     {
-        question: "Does TravelOne charge hidden fees?",
-        answer: "No. Transparency is a core pillar of our Trust Centre. The prices displayed include all known taxes and fees. Our AI orchestration ensures you see the total cost before you authorize a transaction.",
+        question: `Can TravelOne provide the best travel deals?`,
+        answer: `Yes. Our AI engine scans our global partner network in real-time to surface the highest-value options. This is particularly effective for bespoke packages and luxury stays where our "DNA" matching ensures you get the right value for your specific travel style.`,
     },
     {
-        question: "How do I modify or cancel my bookings?",
-        answer: "You can manage your itinerary directly through the TravelOne platform. Changes and cancellations are subject to the specific terms of the travel provider, which are clearly disclosed by TravelOne USA at the time of booking.",
+        question: `Is my data safe?`,
+        answer: `Absolutely. We utilize AES-256 encryption and architectural siloing. Your financial data is handled securely by our U.S. Merchant of Record and is never accessible to the R&D systems in our Canadian tech hub. We comply with global privacy standards, including GDPR, CCPA, and PIPEDA.`,
     },
     {
-        question: "How does TravelOne guarantee quality?",
-        answer: 'We only partner with established, tier-one Destination Management Companies (DMCs) and suppliers. Our "Local Soul" data units feed real-time quality scores into our AI to ensure our partners maintain the highest international standards.',
+        question: `How do I modify or cancel my bookings?`,
+        answer: `You can manage your itinerary directly through the TravelOne platform. Changes and cancellations are subject to the specific terms of the travel provider, which are clearly disclosed by our U.S. service team at the time of booking.`,
     },
     {
-        question: "How does TravelOne satisfy customers?",
-        answer: 'We provide a seamless, high-fidelity experience by removing the "friction" of traditional travel planning. Our U.S.-based Service Team is available to assist with any logistical questions during your journey.',
+        question: `How does TravelOne guarantee quality?`,
+        answer: `We only partner with established, tier-one Destination Management Companies (DMCs) and suppliers. Our "Local Soul" data units feed real-time quality scores into our system to ensure our partners maintain the highest international standards.`,
     },
     {
-        question: "Which payment methods are accepted?",
-        answer: "As the Merchant of Record, TravelOne Global Travel Services LLC (USA) accepts all major credit/debit cards (Visa, Mastercard, Amex), as well as secure digital payment options like PayPal.",
+        question: `What payment methods are accepted?`,
+        answer: `As the Merchant of Record, TravelOne Global Travel Services LLC (USA) accepts all major credit/debit cards (Visa, Mastercard, Amex), as well as secure digital payment options like PayPal.`,
     },
     {
-        question: "How is TravelOne’s customer service?",
-        answer: 'Our global support framework includes email and live chat. For travelers on the road, our U.S. Service Hub provides dedicated assistance to ensure every detail of your "DNA-matched" journey is executed perfectly.',
+        question: `How is your customer service structured?`,
+        answer: `Our global support framework includes email and live chat. For travelers on the road, our U.S. Service Hub, led by CEO Pranav Amin, provides dedicated assistance to ensure every detail of your "DNA-matched" journey is executed perfectly.`,
     }
 ];
 
@@ -66,7 +66,7 @@ export default function FAQPage() {
             {ready && <>
                 <CommonHeader />
 
-                <div className="max-w-7xl mx-auto px-5 md:px-0 py-6">
+                <div className="max-w-5xl mx-auto px-5 md:px-0 py-6">
                     <PageHeading
                         main="FAQs"
                         sub="Frequently Asked Questions"

@@ -127,6 +127,8 @@ export function DownloadBrochure({ tour, open, onOpenChange }: Props) {
                                 setAcceptTerms(false);
                                 setIsSubmitted(false);
                                 setDisableSubmit(false);
+                                setCountryProvince("");
+                                setUserCountry("");
                             }}
                         >
                             ✕
@@ -150,6 +152,8 @@ export function DownloadBrochure({ tour, open, onOpenChange }: Props) {
                                         onChange={(value: any, data: any) => {
                                             setPhone(value);
                                             setUserCountry(data?.country?.iso2);
+                                            setCountryProvince('');
+                                            setDisableSubmit(false);
                                         }}
                                         className="w-full px-4 py-0.5 text-base rounded-sm border border-gray-900 bg-white outline-none"
                                         inputClassName="w-full !border-0 text-sm md:text-md !border-white"

@@ -22,7 +22,7 @@ export default function AdsLandingHeader() {
             <header className="top-0 z-50 bg-white border-b border-[#d9cec1]">
                 <div className="px-4 md:px-8 h-20 md:h-24 flex items-center justify-between">
                     <Image
-                        src="/common/logo.webp"
+                        src="/common/logo.png"
                         alt="Logo"
                         width={160}
                         height={100}

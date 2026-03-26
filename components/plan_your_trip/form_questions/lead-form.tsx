@@ -106,6 +106,8 @@ export default function StepLeadForm({
                                 setMobile(value);
                                 updateForm("mobile", value);
                                 setUserCountry(data?.country?.iso2);
+                                setCountryProvince('');
+                                handleDisableButton(false);
                             }}
                             placeholder="Enter your phone number"
                             className="w-full rounded-sm py-0.5 px-3 text-sm md:text-md text-black font-medium bg-white border border-black"

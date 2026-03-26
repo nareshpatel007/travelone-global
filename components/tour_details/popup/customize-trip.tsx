@@ -52,6 +52,9 @@ export function CustomizeTrip({ tour = {}, open, onOpenChange, mainTitle, subTit
         setIsSubmitted(false);
         setFormData(initialFormData);
         setFormLoading(false);
+        setDisableSubmit(false);
+        setCountryProvince("");
+        setUserCountry("");
     };
 
     // If choose province
@@ -174,7 +177,7 @@ export function CustomizeTrip({ tour = {}, open, onOpenChange, mainTitle, subTit
                         {activeTab === "meeting" && (
                             <div className="border border-[#2F5D50] rounded-sm p-5 space-y-4 bg-white/60">
                                 <InlineWidget
-                                    url="https://calendly.com/travelone/30min"
+                                    url="https://calendly.com/connect-traveloneglobal/30min"
                                     styles={{ height: "500px", width: "100%" }}
                                 />
                             </div>
@@ -207,6 +210,8 @@ export function CustomizeTrip({ tour = {}, open, onOpenChange, mainTitle, subTit
                                                     onChange={(value: any, data: any) => {
                                                         setFormData({ ...formData, phone: value });
                                                         setUserCountry(data?.country?.iso2);
+                                                        setCountryProvince('');
+                                                        setDisableSubmit(false);
                                                     }}
                                                     className="w-full px-4 py-0.5 text-base rounded-sm border border-[#2F5D50] bg-white outline-none"
                                                     inputClassName="w-full !border-0 text-sm md:text-md !border-white"

@@ -168,6 +168,8 @@ export default function ContactPage() {
                                                     onChange={(value: any, data: any) => {
                                                         setFormData({ ...formData, phone: value })
                                                         setUserCountry(data?.country?.iso2);
+                                                        setCountryProvince('');
+                                                        setDisableSubmit(false);
                                                     }}
                                                     placeholder="Enter your phone number"
                                                     className="w-full rounded-sm py-0.5 px-3 text-sm md:text-md text-black font-medium bg-white border border-gray-300"

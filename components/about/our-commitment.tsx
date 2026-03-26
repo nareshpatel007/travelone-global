@@ -27,7 +27,7 @@ export default function OurCommitment() {
                             </h2>
 
                             <p className="text-black text-base sm:text-lg leading-relaxed">
-                                Whether you are a consumer discovering your next destination on travelone.io or a travel professional leveraging our architecture at agent.travelone.io, our mission remains the same: To make travel as intelligent as the people who take it.
+                                Whether you are a consumer discovering your next destination on traveloneglobal.com or a travel professional leveraging our architecture at agent.travelone.io, our mission remains the same: To make travel as intelligent as the people who take it.
                             </p>
                         </div>
                     </div>

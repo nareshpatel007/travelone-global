@@ -102,7 +102,7 @@ export default function CommonFooter({ isStickyShow = false }: Props) {
                             </ul>
                         </div>
                         
-                        {/* <div className='space-y-6'>
+                        <div className='space-y-6'>
                             <h3 className="font-semibold text-lg">Collections</h3>
                             <ul className="space-y-3 text-base">
                                 <li>
@@ -121,9 +121,9 @@ export default function CommonFooter({ isStickyShow = false }: Props) {
                                     <Link href="/country/thailand" className="hover:underline underline-offset-4">Thailand</Link>
                                 </li>
                             </ul>
-                        </div> */}
+                        </div>
 
-                        <div className='space-y-6'>
+                        {/* <div className='space-y-6'>
                             <h3 className="font-semibold text-lg">The Ecosystem</h3>
                             <ul className="space-y-3 text-base">
                                 <li>
@@ -142,24 +142,19 @@ export default function CommonFooter({ isStickyShow = false }: Props) {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/legal/manage-travel-dna" className="hover:underline underline-offset-4">
-                                        Manage My Travel DNA
-                                    </Link>
-                                </li>
-                                <li>
                                     <Link href="/coming-soon" className="hover:underline underline-offset-4">
                                         Partner Login
                                     </Link>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
 
                         <div className='space-y-6'>
-                            <h3 className="font-semibold text-lg">Support</h3>
+                            <h3 className="font-semibold text-lg">Operations</h3>
                             <ul className="space-y-3 text-base">
                                 <li>
-                                    <Link href="/contact" className="hover:underline underline-offset-4">
-                                        Help Center
+                                    <Link href="/operational-disclosure" className="hover:underline underline-offset-4">
+                                        Operational Disclosure
                                     </Link>
                                 </li>
                                 <li>
@@ -173,8 +168,8 @@ export default function CommonFooter({ isStickyShow = false }: Props) {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/coming-soon" className="hover:underline underline-offset-4">
-                                        Travel Advisory
+                                    <Link href="/legal/manage-travel-dna" className="hover:underline underline-offset-4">
+                                        Manage My Travel DNA
                                     </Link>
                                 </li>
                                 <li>

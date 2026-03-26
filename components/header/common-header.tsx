@@ -176,15 +176,15 @@ export default function CommonHeader({ landingPytrip = false }: Props) {
 
             {/* ================= HEADER (UNCHANGED) ================= */}
             <header className="top-0 z-50 bg-white border-b border-[#d9cec1]">
-                <div className="px-4 md:px-8 h-20 md:h-24 flex items-center justify-between">
+                <div className="px-4 md:px-8 h-22 md:h-24 flex items-center justify-between">
                     {/* LOGO */}
                     <Link href="/">
                         <Image
-                            src="/common/logo.webp"
+                            src="/common/logo.png"
                             alt="Logo"
                             width={160}
                             height={100}
-                            className="cursor-pointer w-32 md:w-40"
+                            className="cursor-pointer w-40 md:w-41"
                             draggable="false"
                         />
                     </Link>
@@ -321,21 +321,6 @@ export default function CommonHeader({ landingPytrip = false }: Props) {
                                         South Korea
                                     </Link>
                                 </li>
-                                {/* <li>
-                                    <Link href="/country/indonesia" className="hover:underline">
-                                        Indonesia
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/country/vietnam" className="hover:underline">
-                                        Vietnam
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/country/thailand" className="hover:underline">
-                                        Thailand
-                                    </Link>
-                                </li> */}
                             </ul>
                             <Link href="/country" className="hover:underline">
                                 <button className="bg-black text-white rounded-sm uppercase font-medium border border-black tracking-wide hover:bg-transparent hover:text-black transition cursor-pointer px-4 py-2.5 text-xs">

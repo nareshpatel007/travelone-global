@@ -23,6 +23,7 @@ export default function CheckoutPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [cartData, setCartData] = useState<any>({});
     const [stripeHandlingFee, setStripeHandlingFee] = useState<number>(0);
+    const [disableSubmit, setDisableSubmit] = useState(false);
     const [formData, setFormData] = useState<any>({
         title: "Mr.",
         first_name: "",
@@ -107,16 +108,21 @@ export default function CheckoutPage() {
                             <PassengerForm
                                 formData={formData}
                                 setFormData={setFormData}
+                                setDisableSubmit={setDisableSubmit}
                             />
 
-                            <StripeProvider>
+                            {disableSubmit && <div className="text-center text-sm text-red-600">
+                                TravelOne Global Travel Services, LLC (USA) does not market to or provide travel services to residents of Ontario, Canada. This platform is strictly for the U.S. and international markets. For technology inquiries, please visit travelone.io.
+                            </div>}
+
+                            {!disableSubmit && <StripeProvider>
                                 <PaymentMethod
                                     paymentType={paymentType}
                                     cartData={cartData}
                                     formData={formData}
                                     stripeHandlingFee={stripeHandlingFee}
                                 />
-                            </StripeProvider>
+                            </StripeProvider>}
                         </div>
                         <div className="col-span-1 space-y-4">
                             <OrderSummary paymentType={paymentType} cartData={cartData} />

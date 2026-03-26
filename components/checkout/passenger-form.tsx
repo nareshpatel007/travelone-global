@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 
@@ -7,16 +8,28 @@ import "react-international-phone/style.css";
 interface Props {
     formData: any;
     setFormData: React.Dispatch<React.SetStateAction<any>>;
+    setDisableSubmit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function PassengerForm({ formData, setFormData }: Props) {
+export default function PassengerForm({ formData, setFormData, setDisableSubmit }: Props) {
+    // Define state
+    const [countryProvince, setCountryProvince] = useState<string>("");
+    const [userCountry, setUserCountry] = useState<string>("");
+
+    // If choose province
+    useEffect(() => {
+        setDisableSubmit(countryProvince === "Ontario");
+    }, [countryProvince]);
+
     return (
         <div className="border border-border rounded-sm p-5 md:p-6 bg-card mb-4">
             <span className="text-xl font-semibold text-foreground mb-6 text-black mb-4 block">Lead Passenger Details</span>
             <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div className="space-y-2">
-                        <label className="block text-sm md:text-base font-medium text-muted-foreground">Title</label>
+                        <label className="block text-sm md:text-base font-medium text-muted-foreground">
+                            Title <span className="text-red-500">*</span>
+                        </label>
                         <select
                             value={formData.title}
                             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
@@ -30,7 +43,9 @@ export default function PassengerForm({ formData, setFormData }: Props) {
                         </select>
                     </div>
                     <div className="space-y-2">
-                        <label className="block text-sm md:text-base font-medium text-muted-foreground mb-2">First Name</label>
+                        <label className="block text-sm md:text-base font-medium text-muted-foreground mb-2">
+                            First Name <span className="text-red-500">*</span>
+                        </label>
                         <input
                             type="text"
                             value={formData.first_name}
@@ -40,7 +55,9 @@ export default function PassengerForm({ formData, setFormData }: Props) {
                         />
                     </div>
                     <div className="space-y-2">
-                        <label className="block text-sm md:text-base font-medium text-muted-foreground mb-2">Last Name</label>
+                        <label className="block text-sm md:text-base font-medium text-muted-foreground mb-2">
+                            Last Name <span className="text-red-500">*</span>
+                        </label>
                         <input
                             type="text"
                             value={formData.last_name}
@@ -52,7 +69,9 @@ export default function PassengerForm({ formData, setFormData }: Props) {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                        <label className="block text-sm md:text-base font-medium text-muted-foreground mb-2">Email Address</label>
+                        <label className="block text-sm md:text-base font-medium text-muted-foreground mb-2">
+                            Email Address <span className="text-red-500">*</span>
+                        </label>
                         <input
                             type="email"
                             value={formData.email}
@@ -62,19 +81,55 @@ export default function PassengerForm({ formData, setFormData }: Props) {
                         />
                     </div>
                     <div className="space-y-2">
-                        <label className="block text-sm md:text-base font-medium text-muted-foreground mb-2">Mobile Number</label>
+                        <label className="block text-sm md:text-base font-medium text-muted-foreground mb-2">
+                            Mobile Number <span className="text-red-500">*</span>
+                        </label>
                         <PhoneInput
                             defaultCountry="us"
                             value={formData.phone}
-                            onChange={(e) => setFormData({ ...formData, phone: e })}
+                            onChange={(value: any, data: any) => {
+                                setFormData({ ...formData, phone: value })
+                                setUserCountry(data?.country?.iso2);
+                                setCountryProvince('');
+                                setDisableSubmit(false);
+                            }}
                             placeholder="Enter your phone number"
                             className="w-full rounded-sm py-0.5 px-3 text-sm md:text-md text-black font-medium bg-white border border-black"
                             inputClassName="w-full !border-0 !border-white"
                         />
                     </div>
                 </div>
+                {userCountry && userCountry == 'ca' && <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                        <label className="block text-sm md:text-base font-medium text-muted-foreground mb-2">
+                            Choose Province <span className="text-red-500">*</span>
+                        </label>
+                        <select
+                            className="w-full px-4 py-2 border border-border rounded-sm bg-input text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-accent/50"
+                            onChange={(e) => {
+                                setCountryProvince(e.target.value);
+                            }}
+                        >
+                            <option value="">Select province</option>
+                            <option value="Alberta">Alberta</option>
+                            <option value="British Columbia">British Columbia</option>
+                            <option value="Manitoba">Manitoba</option>
+                            <option value="New Brunswick">New Brunswick</option>
+                            <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                            <option value="Northwest Territories">Northwest Territories</option>
+                            <option value="Nova Scotia">Nova Scotia</option>
+                            <option value="Nunavut">Nunavut</option>
+                            <option value="Ontario">Ontario</option>
+                            <option value="Prince Edward Island">Prince Edward Island</option>
+                            <option value="Quebec">Quebec</option>
+                            <option value="Saskatchewan">Saskatchewan</option>
+                        </select>
+                    </div>
+                </div>}
                 <div>
-                    <label className="block text-sm md:text-base font-medium text-muted-foreground mb-2">Special Requirements</label>
+                    <label className="block text-sm md:text-base font-medium text-muted-foreground mb-2">
+                        Special Requirements
+                    </label>
                     <textarea
                         placeholder="Any special requests or requirements?"
                         value={formData.special_request}

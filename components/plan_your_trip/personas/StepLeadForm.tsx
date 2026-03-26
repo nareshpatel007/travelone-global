@@ -101,6 +101,8 @@ export default function StepLeadForm({
                             onChange={(value: any, data: any) => {
                                 updateForm("mobile", value);
                                 setUserCountry(data?.country?.iso2);
+                                setCountryProvince('');
+                                handleDisableButton(false);
                             }}
                             placeholder="Enter your phone number"
                             className="w-full rounded-sm py-1 px-3 text-sm md:text-md text-black font-medium bg-white border border-black"

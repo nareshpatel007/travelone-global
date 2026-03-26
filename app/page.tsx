@@ -97,9 +97,6 @@ export default function HomePage() {
                 <TheRealityCheck />
                 <WhyTravelOne />
                 <GlobalFinancialSection />
-                <AboutTravelone />
-                {/* <ThreeImageShowcase destinationList={destinationList} /> */}
-                {/* <ToursSlider toursList={toursList} /> */}
                 <BlogSlider blogList={blogList} />
                 <CommonFooter isStickyShow={true} />
                 <StickyHomeHeader />

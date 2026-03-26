@@ -38,7 +38,7 @@ export function ConnectTravelone({ open, onOpenChange }: Props) {
 
                         <div className="border border-[#2F5D50] rounded-sm p-5 space-y-4 bg-white/60">
                             <InlineWidget
-                                url="https://calendly.com/travelone/30min"
+                                url="https://calendly.com/connect-traveloneglobal/30min"
                                 styles={{ height: "500px", width: "100%" }}
                             />
                         </div>

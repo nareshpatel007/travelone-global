@@ -7,14 +7,14 @@ export default function AboutTravelone() {
         <div className="max-w-7xl mx-auto px-5 md:px-0 py-16 space-y-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                 <div className="flex justify-center items-center">
-                    <div className="relative h-[280px] md:h-[380px] aspect-square rounded-xl overflow-hidden">
+                    <div className="relative h-full rounded-xl overflow-hidden">
                         <Image
-                            src="https://ik.imagekit.io/288weifiq/nextjs/bhavin-vora.jpeg"
-                            alt="About TravelOne"
-                            fill
-                            className="object-cover"
-                            priority
-                            sizes="(max-width: 768px) 280px, 380px"
+                            src="/common/bhavin-vora.jpg"
+                            alt="Bhavin Vora"
+                            width={500}
+                            height={700}
+                            draggable={false}
+                            className="rounded-3xl relative z-10 object-cover border border-[#d9cec1]"
                         />
                     </div>
                 </div>
