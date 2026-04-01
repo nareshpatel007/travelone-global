@@ -7,6 +7,7 @@ import Link from "next/link";
 import { getUserIp } from "@/lib/getClientIp";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
+import { isValidEmail } from "@/lib/utils";
 
 interface Props {
     tour: any;
@@ -36,10 +37,10 @@ export function DownloadBrochure({ tour, open, onOpenChange }: Props) {
     const handleSubmit = async () => {
         try {
             // Validation
-            if (!phone) {
+            if (!phone || phone.length < 10) {
                 setErrors("Please enter valid phone number.");
                 return;
-            } else if (!email) {
+            } else if (!email || !isValidEmail(email)) {
                 setErrors("Please enter valid email address.");
                 return;
             } else if (!acceptTerms) {
@@ -211,7 +212,7 @@ export function DownloadBrochure({ tour, open, onOpenChange }: Props) {
                                         onChange={(e) => setAcceptTerms(e.target.checked)}
                                     />
                                     <label className="text-xs md:text-sm text-gray-700">
-                                        I agree to the <Link href="/legal/terms-service" target="_blank" className="underline">T&Cs</Link> and <Link href="/legal/privacy-policy" target="_blank" className="underline">Privacy Policy</Link>, and consent to receive communications from TravelOne Global Travel Services, LLC (USA), including follow-up call and text messages for quotes, scheduling, and call reminders, regarding my inquiry. Std msg & data rates apply. Text STOP to cancel, HELP for info. By continuing, you acknowledge that travel services are fulfilled by TravelOne Global Travel Services, LLC (USA).
+                                        I agree to the <Link href="/legal/terms-service" target="_blank" className="underline">T&Cs</Link> and <Link href="/legal/privacy-policy" target="_blank" className="underline">Privacy Policy</Link>, and consent to receive communications from TravelOne Global Travel Services, LLC (USA), including follow-up call and text messages for quotes, scheduling, and call reminders, regarding my inquiry. Std msg & data rates apply. Text STOP to cancel, HELP for info. By continuing, you agree to <Link href="/operational-disclosure" className="underline" target="_blank">Operational Disclosure</Link> and acknowledge that travel services are fulfilled by TravelOne Global Travel Services, LLC (USA).
                                     </label>
                                 </div>}
 

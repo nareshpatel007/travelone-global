@@ -62,7 +62,7 @@ export default function UserProfilePage() {
         };
         loadInitData();
         return () => controller.abort();
-    }, []);
+    }, [ready]);
 
     return (
         <>

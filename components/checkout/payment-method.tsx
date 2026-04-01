@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { CheckCheck, Loader2, Lock } from "lucide-react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, isValidEmail } from "@/lib/utils";
 import { deleteCartData, getLoginCookie, isLoggedIn } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import { sendFbEvent } from "@/lib/sendFbEvent";
@@ -45,6 +45,12 @@ export default function PaymentMethod({ paymentType, cartData, stripeHandlingFee
         // Validation
         if (!formData.title || !formData.first_name || !formData.last_name || !formData.email || !formData.phone) {
             setErrors("Please fill in all the required fields");
+            return;
+        } else if (!isValidEmail(formData.email)) {
+            setErrors("Please enter valid email address.");
+            return;
+        } else if (formData?.phone < 10) {
+            setErrors("Please enter valid phone number.");
             return;
         }
 

@@ -5,6 +5,7 @@ import { useState } from "react"
 import { X, Mail, CheckCircle, Loader2 } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import QuestionHeading from "../plan_your_trip/landing/questionHeading"
+import { isValidEmail } from "@/lib/utils"
 
 interface ForgotPasswordModalProps {
     open: boolean
@@ -37,9 +38,12 @@ export function ForgotPasswordModal({ open, onOpenChange }: ForgotPasswordModalP
             if (!email) {
                 setErrors("Email is required.");
                 return;
+            } else if (!isValidEmail(email)) {
+                setErrors("Enter a valid email address.");
+                return;
             }
 
-            // Fetch the data
+            // API call
             const response = await fetch("/api/auth/forgot_password", {
                 method: "POST",
                 headers: {
@@ -52,7 +56,7 @@ export function ForgotPasswordModal({ open, onOpenChange }: ForgotPasswordModalP
             const data = await response.json();
 
             // Check response
-            if (data.status) {
+            if (data?.status) {
                 // Update state
                 setErrors("");
                 setEmail("");
@@ -133,7 +137,7 @@ export function ForgotPasswordModal({ open, onOpenChange }: ForgotPasswordModalP
                                     type="submit"
                                     onClick={handleSubmit}
                                     disabled={isFormLoading}
-                                    className="w-full flex items-center justify-center bg-black text-white font-semibold mt-3 py-2.5 rounded-md hover:bg-[#333] transition-colors cursor-pointer"
+                                    className="w-full flex items-center justify-center bg-black text-white font-semibold mt-3 py-2.5 rounded-md hover:bg-[#333] transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isFormLoading && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
                                     Send reset link
@@ -157,7 +161,7 @@ export function ForgotPasswordModal({ open, onOpenChange }: ForgotPasswordModalP
                                         <button
                                             type="button"
                                             onClick={() => setIsSubmitted(false)}
-                                            className="text-[#2F5D50] hover:underline font-medium"
+                                            className="text-[#2F5D50] hover:underline font-medium cursor-pointer"
                                         >
                                             Try again?
                                         </button>

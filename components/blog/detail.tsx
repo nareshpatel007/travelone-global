@@ -1,10 +1,10 @@
 "use client"
 
-import { FacebookIcon, TwitterIcon, InstagramIcon, ArrowRight, Loader2, CheckCircle } from "lucide-react"
+import { Loader2, CheckCircle } from "lucide-react"
 import { BlogSidebar } from "./sidebar"
 import Image from "next/image"
 import { useState } from "react"
-import { formatDate } from "@/lib/utils"
+import { formatDate, isValidEmail } from "@/lib/utils"
 
 // Define interface
 interface Props {
@@ -45,6 +45,9 @@ export function BlogDetail({ blogPost, recentPosts, popularTours, commentData }:
         // Check validation
         if (!formData.name || !formData.email || !formData.comment) {
             setErrors("All fields are required.");
+            return;
+        } else if (!isValidEmail(formData.email)) {
+            setErrors("Please enter valid email address.");
             return;
         }
 
@@ -100,41 +103,6 @@ export function BlogDetail({ blogPost, recentPosts, popularTours, commentData }:
 
     return (
         <>
-            {/* <section className="w-full bg-white mb-10">
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-2 gap-6 md:gap-8">
-                        <Link href="/blog/hidden-beaches" className="group relative h-64 md:h-100 rounded-lg overflow-hidden">
-                            <Image
-                                src="https://wanderaway.qodeinteractive.com/wp-content/uploads/2023/08/Destination-list-3.jpg"
-                                alt="Featured: Hidden Beach Gems"
-                                fill
-                                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                                <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">
-                                    Jordan's ancient Petra and desert landscapes
-                                </h3>
-                            </div>
-                        </Link>
-                        <Link href="/blog/budget-travel-tips" className="group relative h-64 md:h-100 rounded-lg overflow-hidden">
-                            <Image
-                                src="https://wanderaway.qodeinteractive.com/wp-content/uploads/2023/08/Destination-list-9.jpg"
-                                alt="Featured: Budget Travel Tips"
-                                fill
-                                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                                <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">
-                                    Cappadocia's surreal landscapes and hot air
-                                </h3>
-                            </div>
-                        </Link>
-                    </div>
-                </div>
-            </section> */}
-
             <div className="flex flex-col lg:flex-row gap-6">
                 <article className="flex-1 space-y-6">
                     <div className="relative w-full h-70 md:h-[500px] bg-gray-200 overflow-hidden">
@@ -152,82 +120,24 @@ export function BlogDetail({ blogPost, recentPosts, popularTours, commentData }:
                                 Published on {formatDate(blogPost.created_at)}
                             </span>
                         </div>
-
-                        {/* <Image
-                            src={blogPost.gallery[currentImageIndex] || "/placeholder.svg"}
-                            alt="Blog featured"
-                            fill
-                            className="object-cover"
-                            priority
-                        /> */}
-                        {/* <button
-                            onClick={prevImage}
-                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all z-10"
-                        >
-                            <ChevronLeft size={24} className="text-gray-900" />
-                        </button>
-                        <button
-                            onClick={nextImage}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all z-10"
-                        >
-                            <ChevronRight size={24} className="text-gray-900" />
-                        </button> */}
-
-                        {/* Dot Indicators */}
-                        {/* <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                            {blogPost.gallery.map((_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setCurrentImageIndex(index)}
-                                    className={`w-3 h-1 rounded-full transition-all ${index === currentImageIndex ? "bg-amber-500 w-8" : "bg-white/60 hover:bg-white"
-                                        }`}
-                                    aria-label={`Go to image ${index + 1}`}
-                                />
-                            ))}
-                        </div> */}
                     </div>
 
-                    <div className="space-y-4">
-                        {/* <span className="text-lg md:text-4xl font-semibold text-gray-900 block">{blogPost.post_title}</span> */}
+                    <div
+                        className="single_blog_content text-sm md:text-lg font-strong text-gray-900 block"
+                        dangerouslySetInnerHTML={{ __html: blogPost.post_content.replace("```html", "").replace("```", "") }}
+                    />
 
-                        <div
-                            className="single_blog_content text-sm md:text-lg font-strong text-gray-900 block"
-                            dangerouslySetInnerHTML={{ __html: blogPost.post_content.replace("```html", "").replace("```", "") }}
-                        />
-                    </div>
-
-                    {/* <div className="my-7 text-center">
-                        <div className="flex flex-wrap gap-5 justify-center">
-                            <FacebookIcon className="h-6 w-6" />
-                            <TwitterIcon className="h-6 w-6" />
-                            <InstagramIcon className="h-6 w-6" />
-                        </div>
-                    </div> */}
-
-                    {/* <div className="mt-8 py-4 border-t border-b border-gray-200 text-center">
-                        <div className="flex flex-wrap gap-2 justify-center">
-                            {["Europe", "Travel Tips", "Hidden Gems", "Adventure", "Budget Travel"].map((tag) => (
-                                <span
-                                    key={tag}
-                                    className="!px-3 !py-1 !bg-gray-100 !text-gray-700 text-sm rounded-full hover:bg-gray-200 cursor-pointer transition-colors"
-                                >
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
-                    </div> */}
-
-                    <div className="bg-[#edf3ed] p-5 md:p-10 rounded-sm">
-                        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-6 text-center md:text-left">
+                    <div className="bg-[#FFF9EE] border border-[#d9cec1] p-5 md:p-10 rounded-sm">
+                        <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 text-center md:text-left">
                             <Image
                                 src="/common/bella_pic.png"
                                 alt="TravelOne"
                                 width={200}
                                 height={200}
-                                className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full object-cover"
+                                className="w-20 h-20 md:w-28 md:h-28 rounded-full object-cover"
                             />
                             <div className="space-y-3">
-                                <span className="font-semibold text-black block text-base sm:text-lg">
+                                <span className="font-semibold text-black block text-base md:text-lg">
                                     About TravelOne
                                 </span>
 
@@ -239,16 +149,8 @@ export function BlogDetail({ blogPost, recentPosts, popularTours, commentData }:
                         </div>
                     </div>
 
-                    {/* <div className="py-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {tours.map((tour) => (
-                                <TourCard key={tour.id} {...tour} />
-                            ))}
-                        </div>
-                    </div> */}
-
-                    {commentData && commentData.length > 0 && <>
-                        <h2 className="text-2xl font-bold text-gray-900 mb-8">Comments</h2>
+                    {commentData && commentData.length > 0 && <div className="bg-white border border-gray-200 p-8 space-y-6">
+                        <h2 className="text-2xl font-bold text-black">Comments</h2>
                         <div className="space-y-6">
                             {commentData.map((comment: any, index: number) => (
                                 <div key={index} className="flex gap-4 pb-6 border-b border-gray-100">
@@ -268,19 +170,17 @@ export function BlogDetail({ blogPost, recentPosts, popularTours, commentData }:
                                                 <h3 className="font-bold text-gray-900">{comment.name}</h3>
                                                 <p className="text-sm text-gray-500">{formatDate(comment.created_at)}</p>
                                             </div>
-                                            {/* <button className="flex items-center gap-1 text-black hover:text-gray-900 cursor-pointer text-sm font-semibold">
-                                                Reply <ArrowRight size={16} />
-                                            </button> */}
                                         </div>
                                         <p className="text-gray-700">{comment.comment}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                    </>}
+                    </div>}
 
-                    <div className="bg-white py-5 sm:py-8 space-y-6">
-                        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
+                    {/* Comment form */}
+                    <div className="bg-white border border-gray-200 rounded-md p-8 space-y-4">
+                        <h2 className="text-xl sm:text-2xl font-bold text-black">
                             Leave a Reply
                         </h2>
 

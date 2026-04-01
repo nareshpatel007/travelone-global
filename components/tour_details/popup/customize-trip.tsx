@@ -74,6 +74,9 @@ export function CustomizeTrip({ tour = {}, open, onOpenChange, mainTitle, subTit
         } else if (!isValidEmail(formData.email)) {
             setErrors("Please enter valid email address.");
             return;
+        } else if (formData.phone.length < 10) {
+            setErrors("Please enter valid phone number.");
+            return;
         } else if (formData.communication === "Call always" && (!formData.best_day || !formData.best_time)) {
             setErrors("Please select a best day and time.");
             return;
@@ -322,7 +325,7 @@ export function CustomizeTrip({ tour = {}, open, onOpenChange, mainTitle, subTit
                                                 onChange={(e) => setFormData({ ...formData, accept_terms: e.target.checked })}
                                             />
                                             <label className="text-xs md:text-sm text-gray-700">
-                                                I agree to the <Link href="/legal/terms-service" target="_blank" className="underline">T&Cs</Link> and <Link href="/legal/privacy-policy" target="_blank" className="underline">Privacy Policy</Link>, and consent to receive communications from TravelOne Global Travel Services, LLC (USA), including follow-up call and text messages for quotes, scheduling, and call reminders, regarding my inquiry. Std msg & data rates apply. Text STOP to cancel, HELP for info. By continuing, you acknowledge that travel services are fulfilled by TravelOne Global Travel Services, LLC (USA).
+                                                I agree to the <Link href="/legal/terms-service" target="_blank" className="underline">T&Cs</Link> and <Link href="/legal/privacy-policy" target="_blank" className="underline">Privacy Policy</Link>, and consent to receive communications from TravelOne Global Travel Services, LLC (USA), including follow-up call and text messages for quotes, scheduling, and call reminders, regarding my inquiry. Std msg & data rates apply. Text STOP to cancel, HELP for info. By continuing, you agree to <Link href="/operational-disclosure" className="underline" target="_blank">Operational Disclosure</Link> and acknowledge that travel services are fulfilled by TravelOne Global Travel Services, LLC (USA).
                                             </label>
                                         </div>
                                     </>

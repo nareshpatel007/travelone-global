@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { LoginModal } from "../common/login-modal";
-import { Dna, Facebook, Heart, Instagram, Linkedin, ListCheck, LogOut, Menu, Search, ShoppingCartIcon, User, User2, X, Youtube } from "lucide-react";
+import { Dna, Facebook, Heart, Instagram, ListCheck, LogOut, Menu, ShoppingCartIcon, User, User2, X, Youtube } from "lucide-react";
 import { getCartData, getLoginCookie, getWishlistCount, isLoggedIn, removeLoginCookie } from "@/lib/auth";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";

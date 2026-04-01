@@ -182,6 +182,7 @@
 .single_page_content p {
     margin-bottom: 25px;
     line-height: 30px;
+    font-family: Jost, sans-serif !important;
 }
 
 .single_page_content h1,
@@ -192,11 +193,13 @@
 .single_page_content h6 {
     font-weight: 600;
     font-size: 22px;
+    font-family: Jost, sans-serif !important;
 }
 
 .single_page_content ul li,
 .single_page_content ol li {
     margin-bottom: 10px;
+    font-family: Jost, sans-serif !important;
     list-style: disc;
     margin-left: 20px;
 }
@@ -212,14 +215,17 @@
 
 .single_page_content li p {
     margin: 0;
+    font-family: Jost, sans-serif !important;
 }
 
 .single_page_content ol li {
     list-style: decimal;
+    font-family: Jost, sans-serif !important;
 }
 
 .single_page_content td p {
     margin: 0;
+    font-family: Jost, sans-serif !important;
 }
 
 .single_page_content table {
@@ -232,8 +238,9 @@
 }
 
 .single_page_content thead {
-    background: #111;
-    color: #fff;
+    background: #F5F5F5;
+    color: #000;
+    font-family: Jost, sans-serif !important;
 }
 
 .single_page_content th {
@@ -264,6 +271,7 @@
     color: #2563eb;
     text-decoration: none;
     font-weight: 500;
+    font-family: Jost, sans-serif !important;
 }
 
 .single_page_content a:hover {

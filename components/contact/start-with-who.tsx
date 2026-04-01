@@ -15,24 +15,13 @@ export default function StartWithWho() {
                         <Link href="/partnership/ASTA.pdf" target="_blank">
                             <Image
                                 src="/common/ASTA-Logo.png"
-                                alt="TICO"
+                                alt="ASTA"
                                 width={160}
                                 height={80}
                                 draggable="false"
                                 className="object-contain h-auto w-25 md:w-50"
                             />
                         </Link>
-
-                        {/* <Link href="/partnership/ACTA-License.jpeg" target="_blank">
-                            <Image
-                                src="/common/acta-logo.webp"
-                                alt="ACTA"
-                                width={160}
-                                height={80}
-                                draggable="false"
-                                className="object-contain h-auto w-40 md:w-80"
-                            />
-                        </Link> */}
                     </div>
                 </div>
             </div>

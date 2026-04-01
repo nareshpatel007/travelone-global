@@ -16,7 +16,7 @@ export default function TrustedBy({ isAdsLanding }: Props) {
                     Trusted By
                 </h2>
                 <span className="text-base md:text-lg text-black">
-                    We are trusted by leading organizations. Global operations managed by ASTA and ACTA-registered industry professionals.
+                    We are trusted by leading organizations. Global operations managed by ASTA registered industry professionals.
                 </span>
             </div>
 
@@ -41,17 +41,6 @@ export default function TrustedBy({ isAdsLanding }: Props) {
                     draggable="false"
                     className="object-contain h-auto w-20 md:w-36"
                 />
-
-                {/* <Link href="/partnership/ACTA-License.jpeg" target="_blank">
-                    <Image
-                        src="/common/acta-logo.webp"
-                        alt="ACTA"
-                        width={160}
-                        height={80}
-                        draggable="false"
-                        className="object-contain h-auto w-20 md:w-36"
-                    />
-                </Link> */}
             </div>}
 
             {/* Ads Landing */}
@@ -65,15 +54,6 @@ export default function TrustedBy({ isAdsLanding }: Props) {
                         draggable="false"
                         className="object-contain h-auto w-30"
                     />
-
-                    {/* <Image
-                        src="/common/acta-logo.webp"
-                        alt="ACTA"
-                        width={160}
-                        height={80}
-                        draggable="false"
-                        className="object-contain h-auto w-36"
-                    /> */}
                 </div>
                 <div className="hidden md:flex justify-center items-center gap-12">
                     <Image
@@ -93,15 +73,6 @@ export default function TrustedBy({ isAdsLanding }: Props) {
                         draggable="false"
                         className="object-contain h-auto w-36"
                     />
-
-                    {/* <Image
-                        src="/common/acta-logo.webp"
-                        alt="ACTA"
-                        width={160}
-                        height={80}
-                        draggable="false"
-                        className="object-contain h-auto w-36"
-                    /> */}
                 </div>
             </>}
         </div>

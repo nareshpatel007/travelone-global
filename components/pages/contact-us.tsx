@@ -12,6 +12,7 @@ import "react-international-phone/style.css";
 import { sendFbEvent } from "@/lib/sendFbEvent";
 import StartWithWho from "../contact/start-with-who";
 import EconomicTimesSection from "../contact/economic-times";
+import { isValidEmail } from "@/lib/utils";
 
 export default function ContactPage() {
     // Define state
@@ -47,6 +48,12 @@ export default function ContactPage() {
         // Validation
         if (!formData.name || !formData.email || !formData.phone || !formData.subject || !formData.message) {
             setErrors("Please fill in all the required fields.");
+            return;
+        } else if (!isValidEmail(formData.email)) {
+            setErrors("Please enter valid email address.");
+            return;
+        } else if (formData?.phone.length < 10) {
+            setErrors("Please enter valid phone number.");
             return;
         }
 
@@ -249,7 +256,7 @@ export default function ContactPage() {
                                             />
                                         </div>
 
-                                        {errors && <div className="text-red-500 text-sm">{errors}</div>}
+                                        {errors && <div className="text-red-500 text-base">{errors}</div>}
 
                                         {/* Disable submit */}
                                         {disableSubmit && (
@@ -308,7 +315,7 @@ export default function ContactPage() {
                                         <span className="font-semibold text-gray-900 block mb-2">Phone</span>
                                         <div className="space-y-2">
                                             <p className="text-sm text-black/90">
-                                                <Link href="tel:+1-631-292-8833" className="hover:underline">+1 631 292 8833</Link>
+                                                <Link href="tel:+1 703-200-3901" className="hover:underline">+1 703 200 3901</Link>
                                             </p>
                                         </div>
                                     </div>

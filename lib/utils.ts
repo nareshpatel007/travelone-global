@@ -45,13 +45,14 @@ export function formatPrice(price: any, decimal = 2) {
 
 // Email validator
 export function isValidEmail(email: string) {
-    // Check format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Basic format + minimum 2 character TLD
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
 
-    // Check include "text", "demo", "mailinator.com", "dummy" word
-    const emailRegex2 = /text|demo|mailinator|dummy/;
-    if (emailRegex2.test(email)) return false;
+    // Block unwanted keywords
+    const blockedRegex = /text|demo|mailinator|dummy/i;
+    if (blockedRegex.test(email)) return false;
 
+    // Test email against regex
     return emailRegex.test(email);
 }
 

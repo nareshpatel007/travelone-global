@@ -179,7 +179,7 @@ export default function SingleTourPage({ slug }: Props) {
                                             className="object-cover rounded"
                                         />
                                         <span className="text-black text-base font-normal">
-                                            Call us now on <Link href="tel:+1-631-292-8833" className="hover:underline cursor-pointer">+1 631 292 8833</Link>
+                                            Call us now on <Link href="tel:+1 703-200-3901" className="hover:underline cursor-pointer">+1 703 200 3901</Link>
                                         </span>
                                     </div>
 

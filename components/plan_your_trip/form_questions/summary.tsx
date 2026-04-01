@@ -10,6 +10,7 @@ interface Props {
     jumpToStep: (stepKey: string) => void;
     isLandingPage?: boolean;
     selectedCountry?: string;
+    personaCities?: any[];
 }
 
 export default function StepSummary({
@@ -17,7 +18,8 @@ export default function StepSummary({
     setPlanYourTripForm,
     jumpToStep,
     isLandingPage = false,
-    selectedCountry
+    selectedCountry,
+    personaCities
 }: Props) {
     // Show history button
     useEffect(() => {
@@ -79,13 +81,13 @@ export default function StepSummary({
             {
                 label: "Cities",
                 stepKey: "regions",
-                shouldShow: (form: any) => selectedCountry,
+                shouldShow: () => selectedCountry && personaCities && personaCities.length > 0,
                 isAnswered: (form: any) => !!form.cities,
             },
             {
                 label: "Priority Selection",
                 stepKey: "priority_selection",
-                shouldShow: (form: any) => selectedCountry,
+                shouldShow: () => selectedCountry && personaCities && personaCities.length > 0,
                 isAnswered: (form: any) => !!form.priority_selection,
             },
             {

@@ -39,24 +39,13 @@ export default function CommonFooter({ isStickyShow = false }: Props) {
                 <Link href="/partnership/ASTA.pdf" target="_blank">
                     <Image
                         src="/common/ASTA-Logo.png"
-                        alt="TICO"
+                        alt="ASTA"
                         width={160}
                         height={80}
                         draggable="false"
                         className="object-contain h-auto w-20 md:w-26"
                     />
                 </Link>
-
-                {/* <Link href="/partnership/ACTA-License.jpeg" target="_blank">
-                    <Image
-                        src="/common/acta-logo.webp"
-                        alt="ACTA"
-                        width={160}
-                        height={80}
-                        draggable="false"
-                        className="object-contain h-auto w-20 md:w-44"
-                    />
-                </Link> */}
             </div>
 
             <footer className="bg-[#FFF9EE] text-black">
@@ -70,32 +59,32 @@ export default function CommonFooter({ isStickyShow = false }: Props) {
                             <h3 className="font-semibold text-lg">Company</h3>
                             <ul className="space-y-3 text-base">
                                 <li>
-                                    <Link href="/about" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/about" className="hover:underline underline-offset-4">
                                         About
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/contact" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/contact" className="hover:underline underline-offset-4">
                                         Contact
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/trust-center" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/trust-center" className="hover:underline underline-offset-4">
                                         Trust Center
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/blog" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/blog" className="hover:underline underline-offset-4">
                                         Blog
                                     </Link>
                                 </li>
                                 {/* <li>
-                                    <Link href="/intelligence" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/intelligence" className="hover:underline underline-offset-4">
                                         Science of Persona-Led Travel
                                     </Link>
                                 </li> */}
                                 <li>
-                                    <Link href="/careers" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/careers" className="hover:underline underline-offset-4">
                                         Careers
                                     </Link>
                                 </li>
@@ -106,19 +95,19 @@ export default function CommonFooter({ isStickyShow = false }: Props) {
                             <h3 className="font-semibold text-lg">Collections</h3>
                             <ul className="space-y-3 text-base">
                                 <li>
-                                    <Link href="/country/japan" className="hover:underline underline-offset-4">Japan</Link>
+                                    <Link target='_blank' href="/country/japan" className="hover:underline underline-offset-4">Japan</Link>
                                 </li>
                                 <li>
-                                    <Link href="/country/south-korea" className="hover:underline underline-offset-4">South Korea</Link>
+                                    <Link target='_blank' href="/country/south-korea" className="hover:underline underline-offset-4">South Korea</Link>
                                 </li>
                                 <li>
-                                    <Link href="/country/indonesia" className="hover:underline underline-offset-4">Indonesia</Link>
+                                    <Link target='_blank' href="/country/indonesia" className="hover:underline underline-offset-4">Indonesia</Link>
                                 </li>
                                 <li>
-                                    <Link href="/country/vietnam" className="hover:underline underline-offset-4">Vietnam</Link>
+                                    <Link target='_blank' href="/country/vietnam" className="hover:underline underline-offset-4">Vietnam</Link>
                                 </li>
                                 <li>
-                                    <Link href="/country/thailand" className="hover:underline underline-offset-4">Thailand</Link>
+                                    <Link target='_blank' href="/country/thailand" className="hover:underline underline-offset-4">Thailand</Link>
                                 </li>
                             </ul>
                         </div>
@@ -127,22 +116,22 @@ export default function CommonFooter({ isStickyShow = false }: Props) {
                             <h3 className="font-semibold text-lg">The Ecosystem</h3>
                             <ul className="space-y-3 text-base">
                                 <li>
-                                    <Link href="/" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/" className="hover:underline underline-offset-4">
                                         Traveler Portal
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/coming-soon" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/coming-soon" className="hover:underline underline-offset-4">
                                         Tech Hub
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/coming-soon" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/coming-soon" className="hover:underline underline-offset-4">
                                         Travel Agent
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/coming-soon" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/coming-soon" className="hover:underline underline-offset-4">
                                         Partner Login
                                     </Link>
                                 </li>
@@ -153,27 +142,27 @@ export default function CommonFooter({ isStickyShow = false }: Props) {
                             <h3 className="font-semibold text-lg">Operations</h3>
                             <ul className="space-y-3 text-base">
                                 <li>
-                                    <Link href="/operational-disclosure" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/operational-disclosure" className="hover:underline underline-offset-4">
                                         Operational Disclosure
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/faqs" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/faqs" className="hover:underline underline-offset-4">
                                         FAQs
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/legal/mors-security" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/legal/mors-security" className="hover:underline underline-offset-4">
                                         Merchant of Record Security
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/legal/manage-travel-dna" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/legal/manage-travel-dna" className="hover:underline underline-offset-4">
                                         Manage My Travel DNA
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/legal/accessibility-statement" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/legal/accessibility-statement" className="hover:underline underline-offset-4">
                                         Accessibility Statement
                                     </Link>
                                 </li>
@@ -184,27 +173,27 @@ export default function CommonFooter({ isStickyShow = false }: Props) {
                             <h3 className="font-semibold text-lg">Legal & Compliance</h3>
                             <ul className="space-y-3 text-base">
                                 <li>
-                                    <Link href="/legal/terms-service" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/legal/terms-service" className="hover:underline underline-offset-4">
                                         Terms of Service
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/legal/privacy-policy" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/legal/privacy-policy" className="hover:underline underline-offset-4">
                                         Privacy & Data Asset Policy
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/legal/refund-policy" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/legal/refund-policy" className="hover:underline underline-offset-4">
                                         Refund & Cancellation Policy
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/legal/ai-transparency-disclosure" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/legal/ai-transparency-disclosure" className="hover:underline underline-offset-4">
                                         Ethical AI Disclosure
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/legal/impact-statement" className="hover:underline underline-offset-4">
+                                    <Link target='_blank' href="/legal/impact-statement" className="hover:underline underline-offset-4">
                                         Modern Slavery Statement
                                     </Link>
                                 </li>

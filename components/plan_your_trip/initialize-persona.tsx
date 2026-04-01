@@ -17,6 +17,7 @@ import Question9 from "./personas/Question9";
 import Question10 from "./personas/Question10";
 import StepLeadForm from "./personas/StepLeadForm";
 import { getLoginCookie, isLoggedIn, setCookieData, setLoginCookie } from "@/lib/auth";
+import { isValidEmail } from "@/lib/utils";
 
 // Define interface
 interface Props {
@@ -89,70 +90,74 @@ export function InitializePersonaModal({ open, onOpenChange }: Props) {
                 if (
                     !isAuthLogin &&
                     !leadId &&
-                    (!planYourTripForm.full_name || !planYourTripForm.email || !planYourTripForm.mobile)
+                    (!planYourTripForm?.full_name || !planYourTripForm?.email || !planYourTripForm?.mobile)
                 ) {
                     newErrors = "Please fill all required fields.";
-                } else if (!leadId && !planYourTripForm.privacy_policy_accepted) {
+                } else if (!isValidEmail(planYourTripForm?.email)) {
+                    newErrors = "Please enter a valid email.";
+                } else if (planYourTripForm?.mobile?.length < 10) {
+                    newErrors = "Please enter a valid mobile number.";
+                } else if (!leadId && !planYourTripForm?.privacy_policy_accepted) {
                     newErrors = "Please accept the Terms consent.";
                 }
                 break;
 
             case "question_1":
-                if (!planYourTripForm.question_1) {
+                if (!planYourTripForm?.question_1) {
                     newErrors = "Please select an option.";
                 }
                 break;
 
             case "question_2":
-                if (!planYourTripForm.question_2) {
+                if (!planYourTripForm?.question_2) {
                     newErrors = "Please select an option.";
                 }
                 break;
 
             case "question_3":
-                if (!planYourTripForm.question_3) {
+                if (!planYourTripForm?.question_3) {
                     newErrors = "Please select an option.";
                 }
                 break;
 
             case "question_4":
-                if (!planYourTripForm.question_4) {
+                if (!planYourTripForm?.question_4) {
                     newErrors = "Please select an option.";
                 }
                 break;
 
             case "question_5":
-                if (!planYourTripForm.question_5) {
+                if (!planYourTripForm?.question_5) {
                     newErrors = "Please select an option.";
                 }
                 break;
 
             case "question_6":
-                if (!planYourTripForm.question_6) {
+                if (!planYourTripForm?.question_6) {
                     newErrors = "Please select an option.";
                 }
                 break;
 
             case "question_7":
-                if (!planYourTripForm.question_7) {
+                if (!planYourTripForm?.question_7) {
                     newErrors = "Please select an option.";
                 }
                 break;
 
             case "question_8":
-                if (!planYourTripForm.question_8) {
+                if (!planYourTripForm?.question_8) {
                     newErrors = "Please select an option.";
                 }
                 break;
 
             case "question_9":
-                if (!planYourTripForm.question_9) {
+                if (!planYourTripForm?.question_9) {
                     newErrors = "Please select an option.";
                 }
                 break;
 
             case "question_10":
-                if (!planYourTripForm.question_10) {
+                if (!planYourTripForm?.question_10) {
                     newErrors = "Please select an option.";
                 }
                 break;
@@ -236,7 +241,7 @@ export function InitializePersonaModal({ open, onOpenChange }: Props) {
                 // Send FB event
                 sendFbEvent({
                     eventName: "Lead",
-                    email: planYourTripForm.email
+                    email: planYourTripForm?.email
                 });
 
                 // Auto login
@@ -288,9 +293,9 @@ export function InitializePersonaModal({ open, onOpenChange }: Props) {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         user_id: loginData?.user_id,
-                        full_name: planYourTripForm.full_name,
-                        email: planYourTripForm.email,
-                        mobile: planYourTripForm.mobile,
+                        full_name: planYourTripForm?.full_name,
+                        email: planYourTripForm?.email,
+                        mobile: planYourTripForm?.mobile,
                         ip_address: await getClientIp(),
                     }),
                 });

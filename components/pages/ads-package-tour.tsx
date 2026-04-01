@@ -202,7 +202,7 @@ export default function AdsSingleTourPage({ slug }: Props) {
                                             className="object-cover rounded"
                                         />
                                         <span className="text-black text-base font-normal">
-                                            Call <Link href="tel:+1-631-292-8833" className="hover:underline cursor-pointer">+1 631 292 8833</Link> | <Link href="mailto:connect@traveloneglobal.com" className="hover:underline cursor-pointer">connect@traveloneglobal.com</Link>
+                                            Call <Link href="tel:+1 703-200-3901" className="hover:underline cursor-pointer">+1 703 200 3901</Link> | <Link href="mailto:connect@traveloneglobal.com" className="hover:underline cursor-pointer">connect@traveloneglobal.com</Link>
                                         </span>
                                     </div>
 
@@ -221,10 +221,10 @@ export default function AdsSingleTourPage({ slug }: Props) {
                                     <span className="text-black text-sm md:text-base font-normal">
                                         Call {" "}
                                         <Link
-                                            href="tel:+1-631-292-8833"
+                                            href="tel:+1 703-200-3901"
                                             className="hover:underline cursor-pointer"
                                         >
-                                            +1 631 292 8833
+                                            +1 703 200 3901
                                         </Link>
                                     </span>
 

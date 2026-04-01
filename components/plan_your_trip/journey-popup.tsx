@@ -105,8 +105,8 @@ export function StartJourneyModal({
             ...(!haveDestination && !selectedCountry ? ["persona_test", "all_countries"] : []),
             "travel_history",
             "seasons",
-            ...(selectedCountry ? ["regions"] : []),
-            ...(selectedCountry ? ["priority_selection"] : []),
+            ...(selectedCountry && personaCities ? ["regions"] : []),
+            ...(selectedCountry && personaCities ? ["priority_selection"] : []),
             "days",
             "travellers",
             "budget",
@@ -347,11 +347,11 @@ export function StartJourneyModal({
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        full_name: planYourTripForm.full_name,
-                        email: planYourTripForm.email,
-                        mobile: planYourTripForm.mobile,
-                        assistance: planYourTripForm.assistance,
-                        communication: planYourTripForm.communication,
+                        full_name: planYourTripForm?.full_name,
+                        email: planYourTripForm?.email,
+                        mobile: planYourTripForm?.mobile,
+                        assistance: planYourTripForm?.assistance,
+                        communication: planYourTripForm?.communication,
                         ip_address: await getClientIp(),
                     }),
                 });
@@ -366,14 +366,13 @@ export function StartJourneyModal({
                 }
 
                 // Update state
-                setLeadId(data.data.lead_id);
+                setLeadId(data?.data?.lead_id);
                 setStep(step + 1);
             } catch {
-                setErrors("Something went wrong.");
+                setErrors("Something went wrong. Please try again.");
             } finally {
                 setFormLoader(false);
             }
-
             return;
         }
 
@@ -392,7 +391,7 @@ export function StartJourneyModal({
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    lead_id: Number(leadId),
+                    lead_id: leadId,
                     user_id: authData?.user_id,
                     persona_token: isPersonaResult,
                     data: planYourTripForm
@@ -404,20 +403,13 @@ export function StartJourneyModal({
 
             // If success, redirect
             if (json?.status) {
-                sendFbEvent({
-                    eventName: "Lead",
-                    email: planYourTripForm.email
-                });
-
-                // If itinerary generated
                 if (json?.data?.is_itinerary_generated && json?.data?.token) {
                     window.location.href = `/persona-itinerary?token=${json?.data?.token}`;
                 } else {
                     window.location.href = `/thank-you`;
-                    // router.push("/thank-you");
                 }
             } else {
-                setErrors(json.message);
+                setErrors(json?.message || "Unable to process request.");
             }
         } catch {
             setErrors("Unable to process request.");

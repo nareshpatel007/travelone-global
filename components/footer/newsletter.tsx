@@ -1,5 +1,6 @@
 "use client";
 
+import { isValidEmail } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 
@@ -7,19 +8,34 @@ export default function NewsletterSubscribe() {
     const [email, setEmail] = useState("");
     const [isCompleted, setIsCompleted] = useState(false);
     const [isFormLoading, setIsFormLoading] = useState(false);
+    const [error, setError] = useState<string>("");
 
     const handleSubmit = async () => {
-        if (!email) return;
+        // Validation
+        if (!email) {
+            setError("Please enter your email");
+            return;
+        } else if (!isValidEmail(email)) {
+            setError("Please enter a valid email");
+            return;
+        }
 
+        // Update state
+        setError("");
         setIsFormLoading(true);
 
         try {
+            // API call
             await fetch("/api/newsletter", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email }),
+                body: JSON.stringify({
+                    email,
+                    from_domain: '.io'
+                }),
             });
 
+            // Update state
             setEmail("");
             setIsCompleted(true);
         } catch (err) {
@@ -86,6 +102,12 @@ export default function NewsletterSubscribe() {
                             {isCompleted ? "Subscribed" : "Subscribe"}
                         </button>
                     </div>
+
+                    {error && (
+                        <p className="mt-2 text-xs sm:text-sm text-red-600">
+                            {error}
+                        </p>
+                    )}
 
                     {isCompleted && (
                         <p className="mt-2 text-xs sm:text-sm text-green-600">

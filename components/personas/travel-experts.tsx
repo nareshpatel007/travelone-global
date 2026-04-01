@@ -58,7 +58,7 @@ export default function TravelExpert() {
                                     </div>
 
                                     <span className="hidden md:block text-black font-normal text-base">
-                                        OR CALL <Link href="tel:1-631-292-8833" className="hover:underline">+1 631 292 8833</Link>
+                                        OR CALL <Link href="tel:+1-703-200-3901" className="hover:underline">+1 703 200 3901</Link>
                                     </span>
 
                                     <div className="block md:hidden space-y-3 text-center">
@@ -78,7 +78,7 @@ export default function TravelExpert() {
                                         </Link>
 
                                         <span className="text-black font-normal text-base block mt-3">
-                                            OR CALL <Link href="tel:1-631-292-8833" className="hover:underline">+1 631 292 8833</Link>
+                                            OR CALL <Link href="tel:+1-703-200-3901" className="hover:underline">+1 703 200 3901</Link>
                                         </span>
                                     </div>
                                 </div>

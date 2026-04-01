@@ -1,6 +1,8 @@
 "use client";
 
+import { ExternalLink } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 // Leadership Team
 const leadership = [
@@ -8,6 +10,11 @@ const leadership = [
         name: "Louise Berg",
         role: "Head of Global Destination Insights - USA",
         image: "/about/img_team_63e33bbf427638-77996729-78363986.webp"
+    },
+    {
+        name: "Princess B",
+        role: "Destination Expert - USA",
+        image: "/about/img_team_63e33bbf427638-77996729-5421454.png"
     },
     {
         name: "Himani Bhatt",
@@ -56,14 +63,14 @@ export default function LeadershipTeam() {
                         <p className="text-base md:text-lg text-black leading-relaxed max-w-xl">
                             We don’t just process trips; we manage the integrity of your travel experience.
                         </p>
-                        
+
                         <p className="text-base md:text-lg text-black leading-relaxed max-w-xl">
                             Experience the Orchestration. Welcome to TravelOne Global.
                         </p>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {leadership.map((member, index) => (
                         <div key={index} className="text-center space-y-6">
                             <div className="relative flex justify-center">
@@ -121,6 +128,10 @@ export default function LeadershipTeam() {
                         <p className="text-base md:text-lg text-black leading-relaxed max-w-xl">
                             Welcome to the future of travel. Welcome to TravelOne.
                         </p>
+
+                        <Link target='_blank' href="/operational-disclosure" className="flex items-center gap-2 text-black underline-offset-4 underline">
+                            Operational Disclosure <ExternalLink className="w-4 h-4" />
+                        </Link>
                     </div>
                 </div>
             </div>

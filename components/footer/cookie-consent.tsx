@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { X } from 'lucide-react';
 import Link from 'next/link';
 
 // Define Props
@@ -65,14 +64,10 @@ export default function CookieConsent({ isStickyShow = false }: Props) {
                     <h2 className="text-base md:text-lg font-semibold text-gray-800">
                         We use cookies 🍪
                     </h2>
-
-                    {/* <button onClick={handleReject}>
-                        <X size={18} className="text-gray-400 hover:text-black cursor-pointer" />
-                    </button> */}
                 </div>
 
                 <p className="mt-3 text-sm text-gray-600 leading-relaxed">
-                    We use cookies to improve your experience, analyze traffic, and personalize content. By clicking “Accept”, you agree to our use of cookies.
+                    We use cookies to improve your experience, analyze traffic, and personalize content. By clicking “Accept”, you agree to our use of cookies. Read our <Link target='_blank' href="/legal/cookie-policy" className="underline text-gray-800">Cookie Policy</Link> for more information.
                 </p>
 
                 <div className="flex gap-3 mt-5 justify-end">

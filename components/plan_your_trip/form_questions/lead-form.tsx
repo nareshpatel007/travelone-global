@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import QuestionHeading from "./main-heading";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
+import Link from "next/link";
 
 interface Props {
     planYourTripForm: any;
@@ -177,7 +178,7 @@ export default function StepLeadForm({
                         className="mt-1 cursor-pointer"
                     />
                     <label className="text-xs md:text-sm text-black">
-                        I agree to the <a href="/legal/terms-service" target="_blank" className="underline">T&Cs</a> and <a href="/legal/privacy-policy" target="_blank" className="underline">Privacy Policy</a>, and consent to receive communications from TravelOne Global Travel Services, LLC (USA), including follow-up call and text messages for quotes, scheduling, and call reminders, regarding my inquiry. Std msg & data rates apply. Text STOP to cancel, HELP for info. By continuing, you acknowledge that travel services are fulfilled by TravelOne Global Travel Services, LLC (USA).
+                        I agree to the <a href="/legal/terms-service" target="_blank" className="underline">T&Cs</a> and <a href="/legal/privacy-policy" target="_blank" className="underline">Privacy Policy</a>, and consent to receive communications from TravelOne Global Travel Services, LLC (USA), including follow-up call and text messages for quotes, scheduling, and call reminders, regarding my inquiry. Std msg & data rates apply. Text STOP to cancel, HELP for info. By continuing, you agree to <Link href="/operational-disclosure" className="underline" target="_blank">Operational Disclosure</Link> and acknowledge that travel services are fulfilled by TravelOne Global Travel Services, LLC (USA).
                     </label>
                 </div>
             </div>

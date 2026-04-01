@@ -57,7 +57,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             "/legal/accessibility-statement",
             "/legal/mors-security",
             "/legal/travel-advisory",
-            "/partnership/TICO-Bhavin-Vora.pdf",
         ].map((route) => ({
             url: `${SITE_URL}${route}`,
             lastModified: new Date(),

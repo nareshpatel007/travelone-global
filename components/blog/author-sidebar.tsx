@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function AuthorSidebar() {
     return (
-        <div className="relative w-full bg-[#dfe5df] p-8 max-w-sm mx-auto text-center rounded-sm overflow-visible space-y-4">
+        <div className="relative w-full bg-[#FFF9EE] border border-[#d9cec1] p-8 max-w-sm mx-auto text-center rounded-sm overflow-visible space-y-4">
             <div className="relative text-center mx-auto w-30 md:w-45 aspect-square">
                 <Image
                     src="/common/bella_pic.png"

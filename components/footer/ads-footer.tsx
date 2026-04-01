@@ -30,21 +30,12 @@ export default function AdsLandingFooter() {
             <div className="flex flex-wrap items-center justify-center gap-10 bg-[#FFF9EE] py-10">
                 <Image
                     src="/common/ASTA-Logo.png"
-                    alt="TICO"
+                    alt="ASTA"
                     width={160}
                     height={80}
                     draggable="false"
                     className="object-contain h-auto w-20 md:w-26"
                 />
-
-                {/* <Image
-                    src="/common/acta-logo.webp"
-                    alt="ACTA"
-                    width={160}
-                    height={80}
-                    draggable="false"
-                    className="object-contain h-auto w-20 md:w-44"
-                /> */}
             </div>
             <footer className="bg-[#FFF9EE] text-black">
                 <div className="max-w-7xl mx-auto px-6 space-y-12 pb-23">

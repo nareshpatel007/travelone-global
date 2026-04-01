@@ -33,12 +33,6 @@ export function LoginModal({ open, onOpenChange }: Props) {
     const [showForgotPassword, setShowForgotPassword] = useState(false);
     const [errors, setErrors] = useState<string>("");
 
-    // Handle login submit
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log(isSignUp ? "Sign up" : "Log in", { email, password, firstName, lastName });
-    }
-
     // Reset form
     const resetForm = () => {
         setErrors("");
@@ -73,6 +67,9 @@ export function LoginModal({ open, onOpenChange }: Props) {
             if (!email || !password) {
                 setErrors("All fields are required.");
                 return;
+            } else if (!isValidEmail(email)) {
+                setErrors("Please enter a valid email address.");
+                return;
             }
 
             // Fetch the data
@@ -88,7 +85,7 @@ export function LoginModal({ open, onOpenChange }: Props) {
             const data = await response.json();
 
             // Check response
-            if (data.status) {
+            if (data?.status) {
                 // set cookie value
                 setLoginCookie(data?.data);
 
@@ -123,11 +120,11 @@ export function LoginModal({ open, onOpenChange }: Props) {
             if (!email || !password || !firstName || !lastName) {
                 setErrors("All fields are required.");
                 return;
+            } else if (!isValidEmail(email)) {
+                setErrors("Please enter a valid email address.");
+                return;
             } else if (password.length < 8) {
                 setErrors("Password must be at least 8 characters.");
-                return;
-            } else if (isValidEmail(email) === false) {
-                setErrors("Please enter a valid email address.");
                 return;
             } else if (!acceptTerms) {
                 setErrors("Please accept the terms and conditions.");
@@ -380,12 +377,6 @@ export function LoginModal({ open, onOpenChange }: Props) {
                                         <Instagram className="h-4 w-4" />
                                     </button>
                                 </Link>
-
-                                {/* <Link href="https://www.linkedin.com/company/traveloneio/" target="_blank" rel="nofollow">
-                                    <button type="button" className="flex items-center justify-center bg-[#007aff] hover:bg-[#007aff]/90 text-white p-2 rounded-full transition-colors cursor-pointer">
-                                        <Linkedin className="h-4 w-4" />
-                                    </button>
-                                </Link> */}
                             </div>
                         </div>}
                     </div>

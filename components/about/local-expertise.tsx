@@ -31,24 +31,13 @@ export default function LocalExpertise() {
                         <Link href="/partnership/ASTA.pdf" target="_blank">
                             <Image
                                 src="/common/ASTA-Logo.png"
-                                alt="TICO"
+                                alt="ASTA"
                                 width={160}
                                 height={80}
                                 draggable="false"
                                 className="object-contain h-auto w-20 md:w-26"
                             />
                         </Link>
-
-                        {/* <Link href="/partnership/ACTA-License.jpeg" target="_blank">
-                            <Image
-                                src="/common/acta-logo.webp"
-                                alt="ACTA"
-                                width={160}
-                                height={80}
-                                draggable="false"
-                                className="object-contain h-auto w-20 md:w-44"
-                            />
-                        </Link> */}
                     </div>
 
                     <p className="text-black text-base sm:text-lg pt-2">

@@ -16,6 +16,13 @@ export function BookingConfirmation({ orderData }: Props) {
     const [loading, setLoading] = useState(false);
     const [downloadAction, setDownloadAction] = useState('itinerary');
     const [errors, setErrors] = useState<string>("");
+    const [activeTab, setActiveTab] = useState("ach");
+
+    const tabs = [
+        { id: "ach", label: "ACH Transfer" },
+        { id: "domestic", label: "Domestic Wire" },
+        { id: "international", label: "International Wire" },
+    ];
 
     // Handle download itinerary
     const handleDownload = async (action: string) => {
@@ -168,6 +175,78 @@ export function BookingConfirmation({ orderData }: Props) {
                             </Link>
                         </div>
                     </div>
+
+                    {/* Bank Transfer Details */}
+                    {orderData?.order?.payment_method === 'Bank Transfer' && <div className="bg-white border border-gray-200 rounded-sm overflow-hidden mt-6 p-4">
+                        <div className="font-semibold text-black text-base md:text-xl mb-4">
+                            Bank Transfer Details
+                        </div>
+
+                        {/* Tabs */}
+                        <div className="flex border-b border-gray-200 mb-4">
+                            {tabs.map((tab) => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`px-4 py-2 text-sm md:text-base font-medium transition cursor-pointer ${activeTab === tab.id
+                                            ? "border-b-2 border-black text-black"
+                                            : "text-gray-500 hover:text-black"
+                                        }`}
+                                >
+                                    {tab.label}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Content */}
+                        <div className="text-sm md:text-base text-gray-700 space-y-2">
+                            {activeTab === "ach" && (
+                                <div className="space-y-2">
+                                    <p className="font-semibold text-black">
+                                        TravelOne Global Travel Services LLC
+                                    </p>
+                                    <p><span className="font-medium">Routing number:</span> 121145433</p>
+                                    <p><span className="font-medium">Account number:</span> 792684312335243</p>
+                                </div>
+                            )}
+
+                            {activeTab === "domestic" && (
+                                <div className="space-y-2">
+                                    <p className="font-semibold text-black">
+                                        TravelOne Global Travel Services LLC
+                                    </p>
+                                    <p><span className="font-medium">Routing number:</span> 121145433</p>
+                                    <p><span className="font-medium">Account number:</span> 792684312335243</p>
+                                    <p><span className="font-medium">Bank Name:</span> Column N.A.</p>
+                                    <p className="text-gray-500 text-sm">
+                                        (Our Bank is Mercury, it uses Column N.A. as a banking partner)
+                                    </p>
+                                    <p>
+                                        <span className="font-medium">Bank Address:</span><br />
+                                        1 Letterman Drive, Building A, Suite A4-700<br />
+                                        San Francisco, CA 94129
+                                    </p>
+                                </div>
+                            )}
+
+                            {activeTab === "international" && (
+                                <div className="space-y-2">
+                                    <p><span className="font-medium">Routing number:</span> 121145433</p>
+                                    <p><span className="font-medium">Account number:</span> 792684312335243</p>
+                                    <p><span className="font-medium">Bank Name:</span> Column N.A.</p>
+                                    <p className="text-gray-500 text-sm">
+                                        (Our Bank is Mercury.com, it uses Column N.A. as a banking partner)
+                                    </p>
+                                    <p>
+                                        1 Letterman Drive, Building A, Suite A4-700<br />
+                                        San Francisco, CA 94129<br />
+                                        United States
+                                    </p>
+                                    <p><span className="font-medium">SWIFT / BIC Code:</span> CLNOUS66MER</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>}
                 </div>
                 <div className="lg:w-85 space-y-5">
                     <div className="bg-white border border-gray-200 rounded-sm p-4 space-y-3">
