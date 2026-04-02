@@ -49,7 +49,8 @@ export function isValidEmail(email: string) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
 
     // Block unwanted keywords
-    const blockedRegex = /text|demo|mailinator|dummy/i;
+    // const blockedRegex = /text|demo|mailinator|dummy/i;
+    const blockedRegex = /text|demo|dummy/i;
     if (blockedRegex.test(email)) return false;
 
     // Test email against regex

@@ -12,13 +12,14 @@ type Item = {
 
 type Props = {
     token: string;
+    isLocked: boolean;
     valueTable: {
         yes: Item[];
         no: Item[];
     };
 };
 
-export default function ValueTable({ token, valueTable }: Props) {
+export default function ValueTable({ token, isLocked, valueTable }: Props) {
     // Validation
     if (!valueTable) {
         return null;
@@ -113,22 +114,18 @@ export default function ValueTable({ token, valueTable }: Props) {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center gap-6">
-                    <Link href="/manage-traveller-dna" target="_blank">
-                        <button
-                            className="flex items-center justify-center gap-2 px-6 py-2 bg-black text-white rounded hover:bg-yellow-400 hover:text-black cursor-pointer"
-                        >
-                            <MousePointerClick className="w-5 h-5" /> Manage My Traveller DNA
-                        </button>
-                    </Link>
 
-                    <button
-                        onClick={() => onOpenChange(true)}
-                        className="flex items-center justify-center gap-2 px-6 py-2 bg-black text-white rounded hover:bg-yellow-400 hover:text-black cursor-pointer"
-                    >
-                        <Download className="w-5 h-5" /> Download DNA Report
-                    </button>
-                </div>
+                {!isLocked && (
+                    <div className="flex justify-center gap-6">
+                        <Link href="/manage-traveller-dna" target="_blank">
+                            <button
+                                className="flex items-center justify-center gap-2 px-6 py-2 bg-black text-white rounded hover:bg-yellow-400 hover:text-black cursor-pointer"
+                            >
+                                <MousePointerClick className="w-5 h-5" /> Manage My Traveller DNA
+                            </button>
+                        </Link>
+                    </div>
+                )}
             </div>
 
             <DownloadReport token={token} open={open} onOpenChange={onOpenChange} />

@@ -22,7 +22,9 @@ import { isValidEmail } from "@/lib/utils";
 // Define interface
 interface Props {
     open: boolean
-    onOpenChange: (open: boolean) => void
+    onOpenChange: (open: boolean) => void;
+    reference?: string;
+    referenceToken?: string;
 }
 
 // Define form data
@@ -45,7 +47,7 @@ const defaultFormData = {
     ip_address: ""
 };
 
-export function InitializePersonaModal({ open, onOpenChange }: Props) {
+export function InitializePersonaModal({ open, onOpenChange, reference, referenceToken }: Props) {
     // Define route
     const router = useRouter();
 
@@ -229,6 +231,8 @@ export function InitializePersonaModal({ open, onOpenChange }: Props) {
                     user_id: updatedFormData?.user_id,
                     action: "personas-form",
                     data: updatedFormData,
+                    reference,
+                    reference_token: referenceToken,
                     ip_address: await getClientIp(),
                 })
             });
