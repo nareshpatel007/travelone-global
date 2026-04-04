@@ -6,11 +6,12 @@ import { useState } from "react";
 import { ConnectTravelone } from "../common/connect-travelone";
 
 interface Props {
+    isLocked: boolean;
     token: string;
     text: string;
 }
 
-export default function EthosSection({ token, text }: Props) {
+export default function EthosSection({ isLocked, token, text }: Props) {
     // Define state
     const [openConnectTravelone, setOpenConnectTravelone] = useState<boolean>(false);
     const [feedback, setFeedback] = useState<"like" | "dislike" | null>(null);
@@ -41,14 +42,16 @@ export default function EthosSection({ token, text }: Props) {
                             {text}
                         </p>
 
-                        <div className="flex justify-center">
-                            <button
-                                onClick={() => setOpenConnectTravelone(true)}
-                                className="flex items-center justify-center gap-2 px-6 py-2 bg-black text-white rounded hover:bg-yellow-400 hover:text-black cursor-pointer"
-                            >
-                                <Video className="w-5 h-5" /> Consult Your Travel Architect
-                            </button>
-                        </div>
+                        {!isLocked && (
+                            <div className="flex justify-center">
+                                <button
+                                    onClick={() => setOpenConnectTravelone(true)}
+                                    className="flex items-center justify-center gap-2 px-6 py-2 bg-black text-white rounded hover:bg-yellow-400 hover:text-black cursor-pointer"
+                                >
+                                    <Video className="w-5 h-5" /> Consult Your Travel Architect
+                                </button>
+                            </div>
+                        )}
 
                         <div className="flex flex-wrap justify-center pt-2 gap-4">
                             <button

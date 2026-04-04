@@ -148,6 +148,7 @@ export default function Page() {
                             />
                             <EthosSection
                                 token={token}
+                                isLocked={isLocked}
                                 text={resultData?.data?.ethos}
                             />
                             <ValueTable

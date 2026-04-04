@@ -75,7 +75,7 @@ export default function LandingMarqueeSection({
 
                                 <div className="flex items-center text-center">
                                     <Link
-                                        href="/intelligence"
+                                        href="/traveler-dna"
                                         className="text-sm font-medium text-black underline underline-offset-4"
                                     >
                                         Science of Persona-Led Travel

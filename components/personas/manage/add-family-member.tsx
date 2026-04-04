@@ -1,6 +1,7 @@
 "use client";
 
 import { isValidEmail } from "@/lib/utils";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 
@@ -9,6 +10,7 @@ interface Props {
     open: boolean,
     onOpenChange: (open: boolean) => void;
     setReloadContent: (open: boolean) => void;
+    needPaymentForAddMember?: boolean;
     userId: string;
 }
 
@@ -19,9 +21,13 @@ const initialFormData = {
     email: ""
 };
 
-export default function AddFamilyMemberModal({ open, onOpenChange, setReloadContent, userId }: Props) {
+export default function AddFamilyMemberModal({ open, onOpenChange, setReloadContent, needPaymentForAddMember, userId }: Props) {
     // Validation
     if (!open) return null;
+
+    // Define hooks
+    const stripe = useStripe();
+    const elements = useElements();
 
     // Define state
     const [form, setForm] = useState(initialFormData);
@@ -31,7 +37,10 @@ export default function AddFamilyMemberModal({ open, onOpenChange, setReloadCont
     // Handle submit
     const handleSubmit = async () => {
         // Validation
-        if (userId === "" || !form.name || !form.relation || !form.email) {
+        if (!stripe || !elements) {
+            setError("Process failed. Payment method is not loaded. Please contact your admin.");
+            return;
+        } else if (userId === "" || !form.name || !form.relation || !form.email) {
             setError("Please fill all the fields.");
             return;
         } else if (!isValidEmail(form.email)) {
@@ -44,29 +53,94 @@ export default function AddFamilyMemberModal({ open, onOpenChange, setReloadCont
         setFormLoading(true);
 
         try {
-            // API call
-            const res = await fetch("/api/plan_your_trip/manage/add-member", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    user_id: userId,
-                    name: form.name,
-                    relation: form.relation,
-                    email: form.email
-                }),
-            });
+            if (needPaymentForAddMember) {
+                // Create PaymentIntent
+                const res = await fetch("/api/stripe/create-payment-intent", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        amount: Math.round(25 * 100),
+                        email: form?.email,
+                    }),
+                });
 
-            // Convert into JSON
-            const data = await res.json();
+                // Get client secret
+                const { clientSecret } = await res.json();
 
-            // Check response
-            if (data?.status) {
-                setReloadContent(true);
-                onOpenChange(false);
+                // Confirm card payment
+                const result = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: elements.getElement(CardElement)!,
+                        billing_details: {
+                            name: form?.name,
+                            email: form?.email
+                        },
+                    },
+                });
+
+                // Handle result
+                if (result.error) {
+                    // Set error
+                    setError(result.error.message || "You payment was not successful. If money was debited from your account, it will be refunded within 5-7 business days. Please try again later.");
+                } else if (result.paymentIntent?.status === "succeeded") {
+                    // Get payment intent ID
+                    const paymentIntentId = result?.paymentIntent?.id;
+
+                    // API call
+                    const res = await fetch("/api/plan_your_trip/manage/add-member", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            user_id: userId,
+                            name: form.name,
+                            relation: form.relation,
+                            email: form.email,
+                            payment_intent_id: paymentIntentId,
+                            amount: 25,
+                            response: result
+                        }),
+                    });
+
+                    // Convert into JSON
+                    const data = await res.json();
+
+                    // Check response
+                    if (data?.status) {
+                        setReloadContent(true);
+                        onOpenChange(false);
+                    } else {
+                        setError(data?.message || "Error occurred while adding family member. If money was debited from your account, it will be refunded within 5-7 business days. Please try again.");
+                    }
+                }
             } else {
-                setError(data?.message || "Error occurred while adding family member. Please try again.");
+                // API call
+                const res = await fetch("/api/plan_your_trip/manage/add-member", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        name: form.name,
+                        relation: form.relation,
+                        email: form.email
+                    }),
+                });
+
+                // Convert into JSON
+                const data = await res.json();
+
+                // Check response
+                if (data?.status) {
+                    setReloadContent(true);
+                    onOpenChange(false);
+                } else {
+                    setError(data?.message || "Error occurred while adding family member. Please try again.");
+                }
             }
         } catch (error) {
             setError("Error occurred while adding family member. Please try again.");
@@ -77,7 +151,7 @@ export default function AddFamilyMemberModal({ open, onOpenChange, setReloadCont
 
     return (
         <div className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 md:p-8 relative space-y-6">
+            <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 md:p-8 relative space-y-5">
                 <button
                     onClick={() => onOpenChange(false)}
                     disabled={formLoading}
@@ -87,12 +161,19 @@ export default function AddFamilyMemberModal({ open, onOpenChange, setReloadCont
                 </button>
                 <div className="text-center space-y-2">
                     <h2 className="text-xl md:text-2xl font-semibold">
-                        Add Family Member
+                        Invite Member
                     </h2>
                     <p className="text-sm text-gray-500">
                         Include your family to build a shared travel DNA
                     </p>
                 </div>
+
+                {needPaymentForAddMember && (
+                    <div className="flex items-center justify-center gap-2 text-center bg-amber-100 border border-yellow-400 text-black text-sm px-4 py-2.5 rounded relative">
+                        Additional $25 credit required to add per family member
+                    </div>
+                )}
+
                 <div className="space-y-3">
                     <div>
                         <label className="text-base text-black">
@@ -144,15 +225,37 @@ export default function AddFamilyMemberModal({ open, onOpenChange, setReloadCont
                     </div>
                 </div>
 
+                {needPaymentForAddMember && (
+                    <div className="space-y-4">
+                        <hr className="border-t border-gray-200" />
+                        <div className="border rounded px-4 py-3 bg-white text-sm text-gray-700 space-y-2">
+                            <CardElement
+                                options={{
+                                    style: {
+                                        base: {
+                                            fontSize: "16px",
+                                            color: "#000",
+                                            "::placeholder": { color: "#999" },
+                                        },
+                                    },
+                                }}
+                            />
+                        </div>
+                    </div>
+                )}
+
+                {error && (
+                    <div className="text-red-500 text-base">{error}</div>
+                )}
+
                 <div className="space-y-3">
-                    {error && <p className="text-base text-red-500">{error}</p>}
                     <button
                         onClick={handleSubmit}
                         disabled={formLoading}
                         className="flex items-center gap-2 items-center justify-center gap-2 w-full py-2 rounded-full text-base bg-black text-white hover:bg-yellow-400 hover:text-black transition font-medium cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {formLoading && <Loader2 className="animate-spin w-5 h-5" />}
-                        Add Member
+                        {needPaymentForAddMember ? `Complete Payment & Invite` : `Invite Member`}
                     </button>
                 </div>
             </div>

@@ -4,7 +4,7 @@ import CommonHeader from "@/components/header/common-header";
 import CommonFooter from "@/components/footer/common-footer";
 import { useEffect, useState } from "react";
 import PageHeading from "@/components/common/page-heading";
-import { CheckCircle, CheckCircleIcon, ExternalLink, Heart, Home, Loader2, MousePointerClick, Search, ShieldAlert, Trash2 } from "lucide-react";
+import { CheckCircle, CheckCircleIcon, ExternalLink, Heart, Home, Info, Loader2, MousePointerClick, Search, ShieldAlert, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { getLoginCookie } from "@/lib/auth";
 import Link from "next/link";
@@ -16,17 +16,25 @@ import UnlockPremiumAccess from "@/components/personas/membership/unlock-access"
 import StripeProvider from "@/components/providers/StripeProvider";
 import MakePaymentModal from "@/components/personas/membership/payment-popup";
 import AddFamilyMemberModal from "@/components/personas/manage/add-family-member";
+import DeleteAccount from "@/components/personas/manage/delete-account";
+
+// Tooltips
+const perfectMatchTooltips: Record<string, string> = {
+    "Soul": "This destination is your Spiritual Equal; it is selected because its deepest natural rhythm and silence align perfectly with your inner core.",
+    "Climate": "This destination is your Environmental Mirror; it perfectly captures the specific temperature and atmospheric energy your DNA requires to thrive.",
+    "System": "This destination is your Operational Ideal; it provides the exact level of technological precision and infrastructure your lifestyle demands.",
+    "Surface": "This destination is your Cultural Match; it is chosen for its mastery of the specific artistic, culinary, and historical textures you value most."
+};
 
 // Define tabs
 const tabList = [
     { id: 1, name: "Your Travel DNA", value: "answers" },
+    { id: 8, name: "My Membership", value: "my_membership" },
     { id: 2, name: "Countries Matching Your DNA", value: "countries" },
-    // { id: 3, name: "Cities", value: "cities" },
     { id: 4, name: "My Wishlist", value: "my_list" },
-    { id: 5, name: "Manage Your TravelDNA Data", value: "setting" },
-    { id: 6, name: "Feedback", value: "feedback" },
     { id: 7, name: "Blueprint", value: "blueprint" },
-    { id: 8, name: "My Family", value: "my_family" },
+    { id: 6, name: "Feedback", value: "feedback" },
+    { id: 5, name: "Manage Your TravelDNA Data", value: "setting" },
 ];
 
 // Define questions
@@ -112,6 +120,7 @@ export default function Page() {
     const [showWhyPopup, setShowWhyPopup] = useState(false);
     const [activeCountry, setActiveCountry] = useState<any>(null);
     const [openStartJourney, setOpenStartJourney] = useState(false);
+    const [needPaymentForAddMember, setNeedPaymentForAddMember] = useState(false);
     const [openAddFamilyMember, setOpenAddFamilyMember] = useState(false);
     const [journeyCountry, setJourneyCountry] = useState<string>("");
 
@@ -208,13 +217,46 @@ export default function Page() {
 
             // Check response
             if (data?.status) {
-                if (action == 'add') {
-                    const updatedCountries = countries?.map((country: any) => country?.id === countryId ? { ...country, is_wishlisted: !country?.is_wishlisted } : country);
+                if (action === 'add') {
+                    // ✅ Update countries (heart UI)
+                    const updatedCountries = countries.map((country: any) =>
+                        country.id === countryId
+                            ? { ...country, is_wishlisted: true }
+                            : country
+                    );
                     setCountries(updatedCountries);
+
+                    // ✅ Update wishlist tab
+                    const addedCountry = countries.find((c: any) => c.id === countryId);
+
+                    if (addedCountry) {
+                        setPersonaResult((prev: any) => ({
+                            ...prev,
+                            my_list_countries: [
+                                ...(prev?.my_list_countries || []),
+                                { ...addedCountry, is_wishlisted: true }
+                            ]
+                        }));
+                    }
+
                 } else {
-                    // Remove country
-                    const updatedPersonasResult = personaResult?.my_list_countries?.filter((country: any) => country?.id !== countryId);
-                    setPersonaResult({ ...personaResult, my_list_countries: updatedPersonasResult });
+                    // ✅ Remove from wishlist tab
+                    const updatedList = personaResult?.my_list_countries?.filter(
+                        (country: any) => country.id !== countryId
+                    );
+
+                    setPersonaResult((prev: any) => ({
+                        ...prev,
+                        my_list_countries: updatedList
+                    }));
+
+                    // ✅ IMPORTANT: update countries list (remove red heart)
+                    const updatedCountries = countries.map((country: any) =>
+                        country.id === countryId
+                            ? { ...country, is_wishlisted: false }
+                            : country
+                    );
+                    setCountries(updatedCountries);
                 }
             }
         } catch (error) {
@@ -258,35 +300,6 @@ export default function Page() {
             }
         } catch (error) {
             console.error("Wishlist error:", error);
-        }
-    };
-
-    // Clear persona data
-    const handleDeleteAccount = async () => {
-        try {
-            // Update state
-            setIsDeleteProcess(true);
-
-            // API Call
-            const response = await fetch(`/api/plan_your_trip/manage/delete`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    id: personaResult?.id
-                })
-            });
-
-            // Convert into JSON
-            const data = await response.json();
-
-            // Check response
-            if (data?.status) {
-                setIsAccountDeleted(true);
-            }
-        } finally {
-            setIsDeleteProcess(false);
         }
     };
 
@@ -440,21 +453,32 @@ export default function Page() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {countries.length > 0 && countries.map((item: any, index: number) => (
                                     <div key={index} className="relative w-full">
+                                        {/* Badge + Tooltip */}
+                                        {personaResult?.data?.match_perfect && personaResult?.data?.match_perfect?.[item?.id] && (
+                                            <div className="absolute top-3 left-3 z-50">
+                                                <span className="inline-flex items-center gap-2 px-4 py-1 text-sm md:text-base font-medium bg-yellow-400 text-black rounded-full">
+                                                    ★ Perfect Match - {personaResult?.data?.match_perfect?.[item?.id]}
+
+                                                    <span className="relative group flex items-center">
+                                                        <Info size={16} className="cursor-pointer" />
+
+                                                        <span className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-72 p-3 text-sm text-white bg-black rounded shadow-lg opacity-0 group-hover:opacity-100 transition z-50">
+                                                            <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-3 h-3 bg-black rotate-45"></span>
+                                                            {perfectMatchTooltips[personaResult?.data?.match_perfect?.[item?.id]]}
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        )}
+
                                         <div className="relative w-full pb-[65%] md:pb-[60%] overflow-hidden group cursor-pointer rounded-xl">
                                             <Image
                                                 src={item?.featured_image || "/placeholder.svg"}
                                                 alt={item?.name || "placeholder"}
                                                 fill
+                                                priority={true}
                                                 className="object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform"
                                             />
-
-                                            {personaResult?.data?.match_perfect && personaResult?.data?.match_perfect?.[item?.id] && (
-                                                <div className="absolute top-3 left-3">
-                                                    <span className="inline-flex items-center px-4 py-1 text-sm md:text-base font-medium bg-yellow-400 text-black rounded-full">
-                                                        ★ {personaResult?.data?.match_perfect?.[item?.id]} Match
-                                                    </span>
-                                                </div>
-                                            )}
 
                                             {/* Wishlist Button */}
                                             <button
@@ -711,8 +735,8 @@ export default function Page() {
                             </div>
                         )}
 
-                        {/* MY FAMILY */}
-                        {activeTab === "my_family" && (
+                        {/* MY MEMBERSHIP */}
+                        {activeTab === "my_membership" && (
                             <div className="space-y-6">
                                 {/* Plan Info */}
                                 <div className="bg-yellow-100 border border-yellow-300 text-black p-4 rounded-lg text-base">
@@ -722,7 +746,7 @@ export default function Page() {
                                         </>
                                     ) : (
                                         <>
-                                            You have purchased <span className="font-semibold">solo</span> plan for up to <span className="font-semibold">you</span>.
+                                            You have purchased <span className="font-semibold">solo</span> plan, designed just for <span className="font-semibold">you</span>.
                                         </>
                                     )}
                                 </div>
@@ -733,13 +757,30 @@ export default function Page() {
                                         Your Family Members
                                     </h2>
 
-                                    {membership?.plan_name === 'family' && memberList && memberList?.length < 4 && (
-                                        <button
-                                            onClick={() => setOpenAddFamilyMember(true)}
-                                            className="px-5 py-2 rounded-full bg-black text-base text-white hover:bg-yellow-400 hover:text-black transition font-medium cursor-pointer"
-                                        >
-                                            + Add Family Member
-                                        </button>
+                                    {membership?.plan_name === 'family' && (
+                                        <>
+                                            {memberList && memberList?.length < 4 ? (
+                                                <button
+                                                    onClick={() => {
+                                                        setOpenAddFamilyMember(true);
+                                                        setNeedPaymentForAddMember(false);
+                                                    }}
+                                                    className="px-5 py-2 rounded-full bg-black text-base text-white hover:bg-yellow-400 hover:text-black transition font-medium cursor-pointer"
+                                                >
+                                                    + Invite Member
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    onClick={() => {
+                                                        setNeedPaymentForAddMember(true);
+                                                        setOpenAddFamilyMember(true);
+                                                    }}
+                                                    className="px-5 py-2 rounded-full bg-black text-base text-white hover:bg-yellow-400 hover:text-black transition font-medium cursor-pointer"
+                                                >
+                                                    + Invite Member
+                                                </button>
+                                            )}
+                                        </>
                                     )}
                                 </div>
 
@@ -763,7 +804,15 @@ export default function Page() {
                                                 <td className="p-4">
                                                     {authData?.email}
                                                 </td>
-                                                <td className="p-4 flex gap-2"></td>
+                                                <td className="p-4 flex gap-2">
+                                                    <Link target="_blank" href={`/persona-result/?token=${personaResult?.token}`}>
+                                                        <button
+                                                            className="flex items-center gap-2 px-3 py-1 text-sm rounded-full border border-black/20 hover:bg-black hover:text-white transition cursor-pointer"
+                                                        >
+                                                            View Travel DNA <ExternalLink className="w-4 h-4" />
+                                                        </button>
+                                                    </Link>
+                                                </td>
                                             </tr>
                                             {memberList?.length > 0 && (
                                                 memberList.map((member: any, index: number) => (
@@ -775,18 +824,12 @@ export default function Page() {
                                                             {member?.result_token && (
                                                                 <Link href={`/persona-result?token=${member?.result_token}`} target="_blank">
                                                                     <button
-                                                                        className="px-3 py-1 text-sm rounded-full border border-black/20 hover:bg-black hover:text-white transition cursor-pointer"
+                                                                        className="flex items-center gap-2 px-3 py-1 text-sm rounded-full border border-black/20 hover:bg-black hover:text-white transition cursor-pointer"
                                                                     >
-                                                                        View Result
+                                                                        View Travel DNA <ExternalLink className="w-4 h-4" />
                                                                     </button>
                                                                 </Link>
                                                             )}
-
-                                                            {/* <button
-                                                                className="px-3 py-1 text-sm rounded-full border border-red-300 text-red-600 hover:bg-red-500 hover:text-white transition"
-                                                            >
-                                                                Delete
-                                                            </button> */}
                                                         </td>
                                                     </tr>
                                                 ))
@@ -799,9 +842,10 @@ export default function Page() {
                                 {membership?.plan_name === 'family' && (
                                     <div className="text-center pt-6 space-y-6">
                                         <button
+                                            onClick={() => setOpenStartJourney(true)}
                                             className="px-8 py-2 rounded-full bg-black text-white hover:bg-yellow-400 hover:text-black transition text-base font-medium shadow-md hover:shadow-xl cursor-pointer"
                                         >
-                                            Create Tour With Your Family
+                                            Create Trip With Your Family
                                         </button>
 
                                         <p className="text-xs text-gray-500">
@@ -843,44 +887,23 @@ export default function Page() {
                 </div>
             )}
 
-            {/* Confirm Delete */}
-            {confirmAccountDelete && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 bg-opacity-100">
-                    <div className="bg-white p-6 rounded-md shadow-md space-y-4 w-[90%] max-w-md">
-                        <h2 className="text-lg font-semibold">
-                            Are you sure you want to delete your Traveller DNA account and data?
-                        </h2>
-                        <p className="text-base text-gray-600">
-                            This action cannot be undone.
-                        </p>
-                        <div className="flex justify-end gap-2">
-                            <button
-                                disabled={isDeleteProcess}
-                                onClick={() => setConfirmAccountDelete(false)}
-                                className="px-4 py-1.5 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                disabled={isDeleteProcess}
-                                onClick={handleDeleteAccount}
-                                className="flex items-center gap-2 px-4 py-1.5 bg-rose-600 text-white rounded hover:bg-rose-700 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
-                            >
-                                {isDeleteProcess && <Loader2 className="h-4 w-4 animate-spin" />}
-                                {!isDeleteProcess && <CheckCircle className="h-4 w-4" />}
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            <AddFamilyMemberModal
-                open={openAddFamilyMember}
-                onOpenChange={setOpenAddFamilyMember}
-                setReloadContent={setReloadContent}
-                userId={authData?.user_id}
+            <DeleteAccount
+                open={confirmAccountDelete}
+                setOpenChange={setConfirmAccountDelete}
+                setIsAccountDeleted={setIsAccountDeleted}
+                token={personaResult?.token}
+                resultId={personaResult?.id}
             />
+
+            <StripeProvider>
+                <AddFamilyMemberModal
+                    open={openAddFamilyMember}
+                    onOpenChange={setOpenAddFamilyMember}
+                    needPaymentForAddMember={needPaymentForAddMember}
+                    setReloadContent={setReloadContent}
+                    userId={authData?.user_id}
+                />
+            </StripeProvider>
 
             <StartJourneyModal
                 selectedCountry={journeyCountry}
